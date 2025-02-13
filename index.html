@@ -26,6 +26,9 @@
                 
                 function formatCell(cell) {
                     if (!cell || cell.v === undefined) return ""; // Empty cell
+
+                    if (cell.f) return cell.f; // If Google provides formatted text, use it
+                    
                     if (typeof cell.v === "string" && cell.v.startsWith("Date(")) {
                         return extractTimeFromDate(cell.v); // Convert Google Sheets Date format
                     }
