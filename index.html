@@ -6,25 +6,33 @@
     <title>Google Sheets Table</title>
     <script>
         const sheetURL = "https://docs.google.com/spreadsheets/d/e/2PACX-1vSgIz-t8PEDlW0OoilqtPRoKQ65xtsBuxb1tVXBPX2dlGfyCCkLMB9eUdn-90mzCDfRlRRffr6ab4_P/pub?gid=187862000&single=true&output=csv";
+        let previousData = ""; // Fix: Declare previousData
+
         async function fetchData() {
-            const noCacheURL = `${sheetURL}&t=${new Date().getTime()}`; // Cache-busting
-            const response = await fetch(noCacheURL, { cache: "no-store" });
-            const data = await response.text();
-            if (data !== previousData) { // Update only if data changes
-                previousData = data;
-                const rows = data.split("\n").map(row => row.split(","));
-            
-                let table = "<table border='1'>";
-                rows.forEach((row, index) => {
-                    table += "<tr>";
-                    row.forEach(cell => {
-                        table += index === 0 ? `<th>${cell}</th>` : `<td>${cell}</td>`;
+            try {
+                const noCacheURL = `${sheetURL}&t=${new Date().getTime()}`; // Cache-busting
+                const response = await fetch(noCacheURL, { cache: "no-store" });
+                const data = await response.text();
+
+                if (data.trim() !== previousData.trim()) { // Prevents flickering if data is the same
+                    previousData = data.trim(); // Update previousData
+
+                    const rows = data.split("\n").map(row => row.split(","));
+                
+                    let table = "<table border='1'>";
+                    rows.forEach((row, index) => {
+                        table += "<tr>";
+                        row.forEach(cell => {
+                            table += index === 0 ? `<th>${cell}</th>` : `<td>${cell}</td>`;
+                        });
+                        table += "</tr>";
                     });
-                    table += "</tr>";
-                });
-                table += "</table>";
-        
-                document.getElementById("table-container").innerHTML = table;
+                    table += "</table>";
+            
+                    document.getElementById("table-container").innerHTML = table;
+                }
+            } catch (error) {
+                console.error("Error fetching data:", error);
             }
         }
 
