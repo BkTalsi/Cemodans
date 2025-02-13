@@ -6,11 +6,11 @@
     <title>Google Sheets Table</title>
     <script>
         const sheetURL = "https://docs.google.com/spreadsheets/d/e/2PACX-1vSgIz-t8PEDlW0OoilqtPRoKQ65xtsBuxb1tVXBPX2dlGfyCCkLMB9eUdn-90mzCDfRlRRffr6ab4_P/pub?gid=187862000&single=true&output=csv";
-        let previousData = ""; // Store previous data
+        let previousHTML = ""; // Store previous table HTML
 
         async function fetchData() {
             try {
-                console.log("Fetching data..."); // Debugging
+                console.log("Fetching data...");
                 const noCacheURL = `${sheetURL}&t=${new Date().getTime()}`; // Cache-busting
                 const response = await fetch(noCacheURL, { cache: "no-store" });
 
@@ -19,34 +19,36 @@
                 }
 
                 const data = await response.text();
-                console.log("Fetched data:", data); // Debugging
-                
-                if (data.trim() !== previousData.trim()) { // Check if data changed
-                    console.log("Data has changed, updating table..."); // Debugging
-                    previousData = data.trim(); // Update previousData
+                console.log("Fetched raw CSV data:", data);
 
-                    const rows = data.split("\n").map(row => row.split(","));
+                // Parse CSV data
+                const rows = data.trim().split("\n").map(row => row.split(","));
                 
-                    let table = "<table border='1'>";
-                    rows.forEach((row, index) => {
-                        table += "<tr>";
-                        row.forEach(cell => {
-                            table += index === 0 ? `<th>${cell}</th>` : `<td>${cell}</td>`;
-                        });
-                        table += "</tr>";
+                // Build a temporary table
+                let tempTable = "<table border='1'>";
+                rows.forEach((row, index) => {
+                    tempTable += "<tr>";
+                    row.forEach(cell => {
+                        tempTable += index === 0 ? `<th>${cell.trim()}</th>` : `<td>${cell.trim()}</td>`;
                     });
-                    table += "</table>";
-            
-                    document.getElementById("table-container").innerHTML = table;
+                    tempTable += "</tr>";
+                });
+                tempTable += "</table>";
+
+                // Only update if the new table is different
+                if (tempTable !== previousHTML) {
+                    console.log("Updating table...");
+                    document.getElementById("table-container").innerHTML = tempTable;
+                    previousHTML = tempTable; // Store current table HTML
                 } else {
-                    console.log("Data has not changed, skipping update."); // Debugging
+                    console.log("Table unchanged, skipping update.");
                 }
             } catch (error) {
                 console.error("Error fetching data:", error);
             }
         }
 
-        setInterval(fetchData, 5000); // Refresh data every 5 seconds
+        setInterval(fetchData, 5000); // Refresh every 5 seconds
         window.onload = fetchData;
     </script>
 </head>
