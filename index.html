@@ -11,7 +11,7 @@
     <script>
         const sheetID = "1TpX7oRId-a7WD1PFH7aJoR9y6ConYYIWwWOYwMOmO-k";
         const gid = "187862000";
-        const query = encodeURIComponent("select A,B,C,D,E,H,M"); // Fetch the relevant columns (K contains the URLs)
+        const query = encodeURIComponent("select A,B,C,D,E,I,H,M"); // Fetch the relevant columns (K contains the URLs)
         const apiURL = `https://docs.google.com/spreadsheets/d/${sheetID}/gviz/tq?tqx=out:json&gid=${gid}&tq=${query}`;
         
         async function fetchData() {
@@ -33,14 +33,11 @@
                         return extractTimeFromDate(cell.v); // Convert Google Sheets Date format
                     }
                     // Check if the cell contains a URL in column K (or other designated column)
-                    if (rowIndex > 0) {  // If the row is not the header
-                        const urlCell = data.table.rows[rowIndex]?.c[8]; // Column M is at index 11 (zero-indexed)
-                        const linkText = cell.v;  // Column I (text content) will be the link text
-                        
-                        // Check if there is a valid URL in column M
+                    if (rowIndex > 0 && colIndex === 5) {  // Apply only to column I (index 5)
+                        const urlCell = data.table.rows[rowIndex]?.c[7]; // Correct index for column M
+                    
                         if (urlCell && urlCell.v) {
-                            // If there's a URL, create a hyperlink in column I with the URL from M
-                            return `<a href="${urlCell.v}" target="_blank">${linkText}</a>`;
+                            return `<a href="${urlCell.v}" target="_blank">${cell.v}</a>`;
                         }
                     }
                     // If it's a normal URL, create a link
