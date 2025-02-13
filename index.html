@@ -11,7 +11,7 @@
     <script>
         const sheetID = "1TpX7oRId-a7WD1PFH7aJoR9y6ConYYIWwWOYwMOmO-k";
         const gid = "187862000";
-        const query = encodeURIComponent("select A, C"); // Fetch only columns A & C
+        const query = encodeURIComponent("select A,B, C,D,E,F,G,I"); // Fetch only columns A & C
         const apiURL = `https://docs.google.com/spreadsheets/d/${sheetID}/gviz/tq?tqx=out:json&gid=${gid}&tq=${query}`;
         
         async function fetchData() {
