@@ -24,7 +24,7 @@
                 const data = JSON.parse(jsonText);
                 const headers = data.table.cols.map(col => col.label || ""); // Get headers
                 
-                function formatCell(cell) {
+                function formatCell(cell, rowIndex) {
                     if (!cell || cell.v === undefined) return ""; // Empty cell
 
                     if (cell.f) return cell.f; // If Google provides formatted text, use it
@@ -34,7 +34,7 @@
                     }
                     // Check if the cell contains a URL in column K (or other designated column)
                     if (rowIndex > 0) {  // If the row is not the header
-                        const urlCell = data.table.rows[rowIndex]?.c[14]; // Column M is at index 11 (zero-indexed)
+                        const urlCell = data.table.rows[rowIndex]?.c[11]; // Column M is at index 11 (zero-indexed)
                         const linkText = cell.v;  // Column I (text content) will be the link text
                         
                         // Check if there is a valid URL in column M
