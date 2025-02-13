@@ -34,7 +34,7 @@
                     }
                     // Check if the cell contains a URL in column K (or other designated column)
                     if (rowIndex > 0) {  // If the row is not the header
-                        const urlCell = data.table.rows[rowIndex]?.c[11]; // Column M is at index 11 (zero-indexed)
+                        const urlCell = data.table.rows[rowIndex]?.c[6]; // Column M is at index 11 (zero-indexed)
                         const linkText = cell.v;  // Column I (text content) will be the link text
                         
                         // Check if there is a valid URL in column M
