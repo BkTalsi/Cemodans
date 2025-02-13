@@ -67,13 +67,6 @@
 
                     return `${hours}:${minutes}`; // Return time in hh:mm format
                 }
-                function formatCell(cell, rowIndex) {
-                    if (!cell || cell.v === undefined) return ""; // Empty cell
-
-                    
-
-                    return cell.v; // Normal text if no URL found
-                }
 
                 const rows = data.table.rows.map((row, rowIndex) => row.c.map((cell) => formatCell(cell, rowIndex)));
 
