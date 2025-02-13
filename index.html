@@ -11,7 +11,7 @@
     <script>
         const sheetID = "1TpX7oRId-a7WD1PFH7aJoR9y6ConYYIWwWOYwMOmO-k";
         const gid = "187862000";
-        const query = encodeURIComponent("select A,B, C,D,E,H,I,J"); // Fetch only columns A & C
+        const query = encodeURIComponent("select A,B,C,D,E,F,G,H,K"); // Fetch the relevant columns (K contains the URLs)
         const apiURL = `https://docs.google.com/spreadsheets/d/${sheetID}/gviz/tq?tqx=out:json&gid=${gid}&tq=${query}`;
         
         async function fetchData() {
@@ -20,70 +20,50 @@
                 const text = await response.text();
                 const jsonText = text.match(/\{.*\}/s)?.[0]; 
                 if (!jsonText) return;
-        
+
                 const data = JSON.parse(jsonText);
                 const headers = data.table.cols.map(col => col.label || ""); // Get headers
-        
-                function formatCell(cell) {
+
+                function formatCell(cell, rowIndex) {
                     if (!cell || cell.v === undefined) return ""; // Empty cell
-                
-                    if (cell.f) return cell.f; // If Google provides formatted text, use it
-                
-                    if (typeof cell.v === "string" && cell.v.startsWith("Date(")) {
-                        return extractTimeFromDate(cell.v); // Convert Google Date format
-                    }
-                    
-                    // Check for hyperlink in the result value
-                    if (typeof cell.v === "string" && cell.v.startsWith("http")) {
-                        return `<a href="${cell.v}" target="_blank">${cell.v}</a>`; // Handle normal URLs
-                    }
-                    
-                    // Check for formula result with a hyperlink
-                    if (cell.f && cell.f.includes("HYPERLINK")) {
-                        const match = cell.f.match(/HYPERLINK\("([^"]+)",\s*"([^"]+)"\)/);
-                        if (match) {
-                            return `<a href="${match[1]}" target="_blank">${match[2]}</a>`; // Extract link & text
+
+                    // Check if the cell contains a URL in column K (or other designated column)
+                    if (rowIndex > 0) {  // Skip header row (index 0)
+                        const urlCell = data.table.rows[rowIndex]?.c[10]; // Column K is 10 (zero-indexed)
+                        const text = cell.v;  // Column F and G (can change depending on where text is)
+                        
+                        if (urlCell && urlCell.v) {
+                            return `<a href="${urlCell.v}" target="_blank">${text}</a>`; // Create a hyperlink with the URL
                         }
                     }
 
-                    return cell.v; // Normal text
+                    return cell.v; // Normal text if no URL found
                 }
-                
-                // Extract "hh:mm" from Google Sheets Date format
-                function extractTimeFromDate(dateString) {
-                    const match = dateString.match(/Date\((\d+),(\d+),(\d+),(\d+),(\d+)/);
-                    if (!match) return dateString; // If format is unexpected, return as is
-                
-                    let hours = parseInt(match[4]); // Get hours
-                    let minutes = match[5].padStart(2, "0"); // Get minutes and pad if needed
-                
-                    return `${hours}:${minutes}`; // Return time in hh:mm format
-                }
-        
-                const rows = data.table.rows.map(row => row.c.map(formatCell));
-        
+
+                const rows = data.table.rows.map((row, rowIndex) => row.c.map((cell) => formatCell(cell, rowIndex)));
+
                 // Generate table
                 let table = `<table class="table table-striped table-bordered mt-3">
                                 <thead class="table-dark"><tr>`;
                 headers.forEach(header => table += `<th>${header}</th>`);
                 table += `</tr></thead><tbody>`;
-        
+
                 rows.forEach(row => {
                     table += "<tr>";
                     row.forEach(cell => table += `<td>${cell}</td>`);
                     table += "</tr>";
                 });
-        
+
                 table += "</tbody></table>";
-        
+
                 document.getElementById("table-container").innerHTML = table;
             } catch (error) {
                 console.error("Error fetching data:", error);
             }
         }
         
-        setInterval(fetchData, 5000);
-        window.onload = fetchData;
+        setInterval(fetchData, 5000); // Refresh data every 5 seconds
+        window.onload = fetchData; // Fetch data when the page loads
     </script>
 </head>
 <body class="bg-light">
