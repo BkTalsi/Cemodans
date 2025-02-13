@@ -1,59 +1,45 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Google Sheets Table</title>
+const sheetID = "1TpX7oRId-a7WD1PFH7aJoR9y6ConYYIWwWOYwMOmO-k";
+const gid = "187862000";
+const query = encodeURIComponent("select A, C"); // Fetch only columns A & C
+const apiURL = `https://docs.google.com/spreadsheets/d/${sheetID}/gviz/tq?tqx=out:json&gid=${gid}&tq=${query}`;
 
-    <!-- Bootstrap CSS -->
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css">
+async function fetchData() {
+    try {
+        const response = await fetch(apiURL);
+        const text = await response.text();
+        const jsonText = text.match(/\{.*\}/s)?.[0]; 
+        if (!jsonText) return;
 
-    <script>
-        const sheetID = "1TpX7oRId-a7WD1PFH7aJoR9y6ConYYIWwWOYwMOmO-k"; 
-        const gid = "187862000";  
-        const apiURL = `https://docs.google.com/spreadsheets/d/${sheetID}/gviz/tq?tqx=out:json&gid=${gid}`;
-        let previousData = ""; 
+        const data = JSON.parse(jsonText);
+        const headers = data.table.cols.map(col => col.label || ""); // Get headers
 
-        async function fetchData() {
-            try {
-                const response = await fetch(apiURL);
-                const text = await response.text();
-                const jsonText = text.match(/\{.*\}/s)?.[0]; 
-                if (!jsonText) return;
-
-                const data = JSON.parse(jsonText);
-                const rows = data.table.rows.map(row => row.c.map(cell => cell?.v || "")); 
-
-                let table = `<table class="table table-striped table-bordered mt-3">
-                                <thead class="table-dark"><tr>`;
-                rows[0].forEach(cell => table += `<th>${cell}</th>`);
-                table += `</tr></thead><tbody>`;
-
-                rows.slice(1).forEach(row => {
-                    table += "<tr>";
-                    row.forEach(cell => table += `<td>${cell}</td>`);
-                    table += "</tr>";
-                });
-
-                table += "</tbody></table>";
-
-                if (table !== previousData) {
-                    document.getElementById("table-container").innerHTML = table;
-                    previousData = table;
-                }
-            } catch (error) {
-                console.error("Error fetching data:", error);
-            }
+        function formatCell(cell) {
+            if (!cell || cell.v === undefined) return ""; 
+            if (typeof cell.v === "number" && cell.f) return cell.f; 
+            return cell.v; 
         }
 
-        setInterval(fetchData, 5000); 
-        window.onload = fetchData;
-    </script>
-</head>
-<body class="bg-light">
-    <div class="container mt-5">
-        <h2 class="text-center">📊 Live Google Sheets Table</h2>
-        <div id="table-container" class="mt-4"></div>
-    </div>
-</body>
-</html>
+        const rows = data.table.rows.map(row => row.c.map(formatCell));
+
+        // Generate table
+        let table = `<table class="table table-striped table-bordered mt-3">
+                        <thead class="table-dark"><tr>`;
+        headers.forEach(header => table += `<th>${header}</th>`);
+        table += `</tr></thead><tbody>`;
+
+        rows.forEach(row => {
+            table += "<tr>";
+            row.forEach(cell => table += `<td>${cell}</td>`);
+            table += "</tr>";
+        });
+
+        table += "</tbody></table>";
+
+        document.getElementById("table-container").innerHTML = table;
+    } catch (error) {
+        console.error("Error fetching data:", error);
+    }
+}
+
+setInterval(fetchData, 5000);
+window.onload = fetchData;
