@@ -24,7 +24,7 @@
                 const data = JSON.parse(jsonText);
                 const headers = data.table.cols.map(col => col.label || ""); // Get headers
                 
-                function formatCell(cell, rowIndex) {
+                function formatCell(cell, rowIndex, colIndex) {
                     if (!cell || cell.v === undefined) return ""; // Empty cell
 
                     if (cell.f) return cell.f; // If Google provides formatted text, use it
@@ -65,7 +65,10 @@
                     return `${hours}:${minutes}`; // Return time in hh:mm format
                 }
 
-                const rows = data.table.rows.map((row, rowIndex) => row.c.map((cell) => formatCell(cell, rowIndex)));
+                const rows = data.table.rows.map((row, rowIndex) => 
+                    row.c.map((cell, colIndex) => formatCell(cell, rowIndex, colIndex))
+                );
+
 
                 // Generate table
                 let table = `<table class="table table-striped table-bordered mt-3">
