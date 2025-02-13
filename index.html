@@ -25,10 +25,28 @@
                 const headers = data.table.cols.map(col => col.label || ""); // Get headers
         
                 function formatCell(cell) {
-                    if (!cell || cell.v === undefined) return ""; 
-                    if (typeof cell.v === "number" && cell.f) return cell.f; 
-                    return cell.v; 
+                    if (!cell || cell.v === undefined) return ""; // Empty cell
+                
+                    if (cell.f) return cell.f; // If Google provides formatted text, use it
+                
+                    if (typeof cell.v === "string" && cell.v.startsWith("Date(")) {
+                        return extractTimeFromDate(cell.v); // Convert Google Date format
+                    }
+                
+                    return cell.v; // Normal text
                 }
+                
+                // Extract "hh:mm" from Google Sheets Date format
+                function extractTimeFromDate(dateString) {
+                    const match = dateString.match(/Date\((\d+),(\d+),(\d+),(\d+),(\d+)/);
+                    if (!match) return dateString; // If format is unexpected, return as is
+                
+                    let hours = parseInt(match[4]);
+                    let minutes = match[5].padStart(2, "0");
+                
+                    return `${hours}:${minutes}`;
+                }
+
         
                 const rows = data.table.rows.map(row => row.c.map(formatCell));
         
