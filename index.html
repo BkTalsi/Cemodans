@@ -10,19 +10,22 @@
             const noCacheURL = `${sheetURL}&t=${new Date().getTime()}`; // Cache-busting
             const response = await fetch(noCacheURL, { cache: "no-store" });
             const data = await response.text();
-            const rows = data.split("\n").map(row => row.split(","));
+            if (data !== previousData) { // Update only if data changes
+                previousData = data;
+                const rows = data.split("\n").map(row => row.split(","));
             
-            let table = "<table border='1'>";
-            rows.forEach((row, index) => {
-                table += "<tr>";
-                row.forEach(cell => {
-                    table += index === 0 ? `<th>${cell}</th>` : `<td>${cell}</td>`;
+                let table = "<table border='1'>";
+                rows.forEach((row, index) => {
+                    table += "<tr>";
+                    row.forEach(cell => {
+                        table += index === 0 ? `<th>${cell}</th>` : `<td>${cell}</td>`;
+                    });
+                    table += "</tr>";
                 });
-                table += "</tr>";
-            });
-            table += "</table>";
-
-            document.getElementById("table-container").innerHTML = table;
+                table += "</table>";
+        
+                document.getElementById("table-container").innerHTML = table;
+            }
         }
 
         setInterval(fetchData, 5000); // Refresh data every 5 seconds
