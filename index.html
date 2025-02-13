@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Google Sheets Table</title>
+    <script>
+        async function fetchData() {
+            const sheetURL = "https://docs.google.com/spreadsheets/d/e/2PACX-1vSgIz-t8PEDlW0OoilqtPRoKQ65xtsBuxb1tVXBPX2dlGfyCCkLMB9eUdn-90mzCDfRlRRffr6ab4_P/pub?gid=187862000&single=true&output=csv";
+            const response = await fetch(sheetURL);
+            const data = await response.text();
+            const rows = data.split("\n").map(row => row.split(","));
+            
+            let table = "<table border='1'>";
+            rows.forEach((row, index) => {
+                table += "<tr>";
+                row.forEach(cell => {
+                    table += index === 0 ? `<th>${cell}</th>` : `<td>${cell}</td>`;
+                });
+                table += "</tr>";
+            });
+            table += "</table>";
+
+            document.getElementById("table-container").innerHTML = table;
+        }
+
+        setInterval(fetchData, 5000); // Refresh data every 5 seconds
+        window.onload = fetchData;
+    </script>
+</head>
+<body>
+    <h2>Live Google Sheets Table</h2>
+    <div id="table-container"></div>
+</body>
+</html>
