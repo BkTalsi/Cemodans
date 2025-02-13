@@ -26,14 +26,6 @@
                 
                 function formatCell(cell) {
                     if (!cell || cell.v === undefined) return ""; // Empty cell
-
-                    // Check if the cell contains a formula result with hyperlink
-                    if (cell.f && cell.f.includes('HYPERLINK')) {
-                        const match = cell.f.match(/HYPERLINK\("([^"]+)",\s*"([^"]+)"\)/);
-                        if (match) {
-                            return `<a href="${match[1]}" target="_blank">${match[2]}</a>`; // Extract the link & text
-                        }
-                    }
                     
                     // Check if the cell contains a URL in column K (or other designated column)
                     if (rowIndex > 0) {  // If the row is not the header
@@ -55,6 +47,9 @@
                     // if (typeof cell.v === "string" && cell.v.startsWith("Date(")) {
                     //     return extractTimeFromDate(cell.v); // Convert Google Sheets Date format
                     // }
+                    if (typeof cell.v === "string" && cell.v.startsWith("Date(")) {
+                                            return extractTimeFromDate(cell.v); // Convert Google Sheets Date format
+                                        }
 
                     return cell.v; // Normal text
                 }
