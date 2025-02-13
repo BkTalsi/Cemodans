@@ -11,7 +11,7 @@
     <script>
         const sheetID = "1TpX7oRId-a7WD1PFH7aJoR9y6ConYYIWwWOYwMOmO-k";
         const gid = "187862000";
-        const query = encodeURIComponent("select A,B,C,D,E,F,G,H,M"); // Fetch the relevant columns (K contains the URLs)
+        const query = encodeURIComponent("select A,B,C,D,E,H,M"); // Fetch the relevant columns (K contains the URLs)
         const apiURL = `https://docs.google.com/spreadsheets/d/${sheetID}/gviz/tq?tqx=out:json&gid=${gid}&tq=${query}`;
         
         async function fetchData() {
@@ -36,12 +36,14 @@
                     }
                     
                     // Check if the cell contains a URL in column K (or other designated column)
-                    if (rowIndex > 0) {  // Skip header row (index 0)
-                        const urlCell = data.table.rows[rowIndex]?.c[14]; // Column K is 10 (zero-indexed)
-                        const text = cell.v;  // Column F and G (can change depending on where text is)
+                    if (rowIndex > 0) {  // If the row is not the header
+                        const urlCell = data.table.rows[rowIndex]?.c[11]; // Column M is at index 11 (zero-indexed)
+                        const linkText = cell.v;  // Column I (text content) will be the link text
                         
+                        // Check if there is a valid URL in column M
                         if (urlCell && urlCell.v) {
-                            return `<a href="${urlCell.v}" target="_blank">${text}</a>`; // Create a hyperlink with the URL
+                            // If there's a URL, create a hyperlink in column I with the URL from M
+                            return `<a href="${urlCell.v}" target="_blank">${linkText}</a>`;
                         }
                     }
                     // If it's a normal URL, create a link
