@@ -37,7 +37,8 @@
                     // Check if the cell contains a URL in column K (or other designated column)
                     if (rowIndex > 0 && colIndex === 5) {  // Apply only to column I (index 5)
                         const urlCell = data.table.rows[rowIndex]?.c[7]; // Correct index for column M
-                    
+                        console.log(`Row ${rowIndex}, Column I:`, cell.v);  
+                        console.log(`Row ${rowIndex}, URL column:`, urlCell?.v);  
                         if (urlCell && urlCell.v) {
                             return `<a href="${urlCell.v}" target="_blank">${cell.v}</a>`;
                         }
@@ -81,7 +82,8 @@
 
                 rows.forEach(row => {
                     table += "<tr>";
-                    row.forEach(cell => table += `<td>${cell}</td>`);
+                    //row.forEach(cell => table += `<td>${cell}</td>`);
+                    row.forEach(cell => table += `<td>${cell instanceof String ? cell : cell.toString()}</td>`);
                     table += "</tr>";
                 });
 
