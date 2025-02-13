@@ -32,7 +32,17 @@
                     if (typeof cell.v === "string" && cell.v.startsWith("Date(")) {
                         return extractTimeFromDate(cell.v); // Convert Google Date format
                     }
+                    
+                    if (cell.f && cell.f.includes("HYPERLINK")) {
+                        const match = cell.f.match(/HYPERLINK\("([^"]+)",\s*"([^"]+)"\)/);
+                        if (match) {
+                            return `<a href="${match[1]}" target="_blank">${match[2]}</a>`; // Extract link & text
+                        }
+                    }
                 
+                    if (typeof cell.v === "string" && cell.v.startsWith("http")) {
+                        return `<a href="${cell.v}" target="_blank">🔗 Open File</a>`; // Handle normal URLs
+                    }
                     return cell.v; // Normal text
                 }
                 
