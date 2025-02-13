@@ -41,12 +41,11 @@
                     const match = dateString.match(/Date\((\d+),(\d+),(\d+),(\d+),(\d+)/);
                     if (!match) return dateString; // If format is unexpected, return as is
                 
-                    let hours = parseInt(match[4]);
-                    let minutes = match[5].padStart(2, "0");
+                    let hours = parseInt(match[4]); // Get hours
+                    let minutes = match[5].padStart(2, "0"); // Get minutes and pad if needed
                 
-                    return `${hours}:${minutes}`;
+                    return `${hours}:${minutes}`; // Return time in hh:mm format
                 }
-
         
                 const rows = data.table.rows.map(row => row.c.map(formatCell));
         
