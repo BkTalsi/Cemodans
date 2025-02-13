@@ -29,7 +29,7 @@
 
                     // Check if the cell contains a URL in column K (or other designated column)
                     if (rowIndex > 0) {  // Skip header row (index 0)
-                        const urlCell = data.table.rows[rowIndex]?.c[10]; // Column K is 10 (zero-indexed)
+                        const urlCell = data.table.rows[rowIndex]?.c[14]; // Column K is 10 (zero-indexed)
                         const text = cell.v;  // Column F and G (can change depending on where text is)
                         
                         if (urlCell && urlCell.v) {
