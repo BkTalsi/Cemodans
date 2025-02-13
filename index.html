@@ -6,15 +6,23 @@
     <title>Google Sheets Table</title>
     <script>
         const sheetURL = "https://docs.google.com/spreadsheets/d/e/2PACX-1vSgIz-t8PEDlW0OoilqtPRoKQ65xtsBuxb1tVXBPX2dlGfyCCkLMB9eUdn-90mzCDfRlRRffr6ab4_P/pub?gid=187862000&single=true&output=csv";
-        let previousData = ""; // Fix: Declare previousData
+        let previousData = ""; // Store previous data
 
         async function fetchData() {
             try {
+                console.log("Fetching data..."); // Debugging
                 const noCacheURL = `${sheetURL}&t=${new Date().getTime()}`; // Cache-busting
                 const response = await fetch(noCacheURL, { cache: "no-store" });
-                const data = await response.text();
 
-                if (data.trim() !== previousData.trim()) { // Prevents flickering if data is the same
+                if (!response.ok) {
+                    throw new Error(`HTTP error! Status: ${response.status}`);
+                }
+
+                const data = await response.text();
+                console.log("Fetched data:", data); // Debugging
+                
+                if (data.trim() !== previousData.trim()) { // Check if data changed
+                    console.log("Data has changed, updating table..."); // Debugging
                     previousData = data.trim(); // Update previousData
 
                     const rows = data.split("\n").map(row => row.split(","));
@@ -30,6 +38,8 @@
                     table += "</table>";
             
                     document.getElementById("table-container").innerHTML = table;
+                } else {
+                    console.log("Data has not changed, skipping update."); // Debugging
                 }
             } catch (error) {
                 console.error("Error fetching data:", error);
