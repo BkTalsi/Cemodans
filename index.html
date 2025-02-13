@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Google Sheets Table</title>
+    <title>Google Sheets Table (No CORS Issue)</title>
     <style>
         table {
             border-collapse: collapse;
@@ -16,56 +16,47 @@
         }
     </style>
     <script>
-        const sheetURL = "https://docs.google.com/spreadsheets/d/e/2PACX-1vSgIz-t8PEDlW0OoilqtPRoKQ65xtsBuxb1tVXBPX2dlGfyCCkLMB9eUdn-90mzCDfRlRRffr6ab4_P/pub?gid=187862000&single=true&output=csv";
+        const sheetID = "1TpX7oRId-a7WD1PFH7aJoR9y6ConYYIWwWOYwMOmO-k"; // 🔹 Replace with your actual Google Sheet ID
+        const gid = "187862000";        // 🔹 Replace with your actual GID (tab ID)
+        const apiURL = `https://docs.google.com/spreadsheets/d/${sheetID}/gviz/tq?tqx=out:json&gid=${gid}`;
+
         let previousData = ""; // Store last known data
 
         async function fetchData() {
             try {
                 console.log("Fetching data...");
+                
+                const response = await fetch(apiURL);
+                const text = await response.text();
 
-                // Stronger cache-busting technique
-                const response = await fetch(sheetURL, {
-                    headers: {
-                        "Cache-Control": "no-cache, no-store, must-revalidate",
-                        "Pragma": "no-cache",
-                        "Expires": "0"
-                    }
-                });
-
-                if (!response.ok) {
-                    throw new Error(`HTTP error! Status: ${response.status}`);
-                }
-
-                const data = await response.text();
-
-                // Prevent updates if we get inconsistent results (e.g., partial loads)
-                if (!data.trim() || data.trim().length < 10) {
-                    console.warn("Skipping update: Data appears incomplete or empty.");
+                // Extract JSON from Google's response
+                const jsonText = text.match(/\{.*\}/s)?.[0]; 
+                if (!jsonText) {
+                    console.warn("Invalid JSON response from Google Sheets.");
                     return;
                 }
 
-                console.log("Fetched data:", data);
+                const data = JSON.parse(jsonText);
+                const rows = data.table.rows.map(row => row.c.map(cell => cell?.v || "")); // Extract values
 
-                // Only update if the new data is actually different
-                if (data.trim() !== previousData.trim()) {
-                    console.log("New data detected! Updating table...");
-                    previousData = data.trim(); // Store latest version
-
-                    const rows = data.split("\n").map(row => row.split(","));
-                
-                    let table = "<table>";
-                    rows.forEach((row, index) => {
-                        table += "<tr>";
-                        row.forEach(cell => {
-                            table += index === 0 ? `<th>${cell.trim()}</th>` : `<td>${cell.trim()}</td>`;
-                        });
-                        table += "</tr>";
+                // Build HTML table
+                let table = "<table>";
+                rows.forEach((row, index) => {
+                    table += "<tr>";
+                    row.forEach(cell => {
+                        table += index === 0 ? `<th>${cell}</th>` : `<td>${cell}</td>`;
                     });
-                    table += "</table>";
+                    table += "</tr>";
+                });
+                table += "</table>";
 
+                // Only update if new data is different
+                if (table !== previousData) {
                     document.getElementById("table-container").innerHTML = table;
+                    previousData = table;
+                    console.log("Table updated.");
                 } else {
-                    console.log("Data has not changed, skipping update.");
+                    console.log("No changes detected.");
                 }
             } catch (error) {
                 console.error("Error fetching data:", error);
