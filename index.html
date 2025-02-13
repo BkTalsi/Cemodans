@@ -5,9 +5,10 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Google Sheets Table</title>
     <script>
+        const sheetURL = "https://docs.google.com/spreadsheets/d/e/2PACX-1vSgIz-t8PEDlW0OoilqtPRoKQ65xtsBuxb1tVXBPX2dlGfyCCkLMB9eUdn-90mzCDfRlRRffr6ab4_P/pub?gid=187862000&single=true&output=csv";
         async function fetchData() {
-            const sheetURL = "https://docs.google.com/spreadsheets/d/e/2PACX-1vSgIz-t8PEDlW0OoilqtPRoKQ65xtsBuxb1tVXBPX2dlGfyCCkLMB9eUdn-90mzCDfRlRRffr6ab4_P/pub?gid=187862000&single=true&output=csv";
-            const response = await fetch(sheetURL);
+            const noCacheURL = `${sheetURL}&t=${new Date().getTime()}`; // Cache-busting
+            const response = await fetch(noCacheURL, { cache: "no-store" });
             const data = await response.text();
             const rows = data.split("\n").map(row => row.split(","));
             
