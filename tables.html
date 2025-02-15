@@ -47,7 +47,7 @@
                 const results = {};
                 rows.forEach(row => {
                     const matchID = row.c[0]?.v;
-                    const result = row.c[1]?.v;
+                    const result = row.c[8]?.v;
                     if (matchID && result) {
                         results[matchID] = result;
                     }
