@@ -33,7 +33,15 @@
                     const teamB = row.c[7]?.v;
                     let scoreA = row.c[5]?.v;
                     let scoreB = row.c[6]?.v;
-                    const zeroIndic = row.c[11];
+                    let zeroIndic;
+                    
+                    // Convert row.c[11] to string or handle it as null/undefined
+                    if (row.c[11] !== null && row.c[11] !== undefined) {
+                        // Convert to string and trim any extra spaces
+                        zeroIndic = String(row.c[11]?.v).trim();
+                    } else {
+                        zeroIndic = ""; // Assign an empty string if value is null or undefined
+                    }
                     
                     // const zA = scoreA === 'z';
                     // const zB = scoreB === 'z';
