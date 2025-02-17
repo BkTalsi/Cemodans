@@ -28,11 +28,12 @@
                     const teamB = row.c[7]?.v;
                     let scoreA = row.c[5]?.v;
                     let scoreB = row.c[6]?.v;
-    
+                
                     const zA = scoreA === 'z';
                     const zB = scoreB === 'z';
-    
+                
                     if (teamA && teamB) {
+                        // Handle 'z' cases
                         if (zA && !zB) {
                             scoreA = 0;
                             scoreB = 20;
@@ -40,12 +41,12 @@
                             scoreA = 20;
                             scoreB = 0;
                         }
-    
-                        // Adjust points for 'z' cases
-                        let pointsA = zA ? 0 : (scoreA > scoreB ? 2 : 1);
-                        let pointsB = zB ? 0 : (scoreB > scoreA ? 2 : 1);
-                        
-                        // If one is 'z', ensure correct points assignment
+                
+                        // Adjust points based on the scores
+                        let pointsA = zA ? 0 : (scoreA > scoreB ? 2 : (scoreA === scoreB ? 1 : 0));
+                        let pointsB = zB ? 0 : (scoreB > scoreA ? 2 : (scoreA === scoreB ? 1 : 0));
+                
+                        // If one team is 'z', they get 0 points, and the other gets 2 points
                         if (zA && !zB) {
                             pointsA = 0;
                             pointsB = 2;
@@ -54,10 +55,11 @@
                             pointsA = 2;
                             pointsB = 0;
                         }
-    
-                        const scoreStrA = `${scoreA ?? ''}:${scoreB ?? ''}`;
-                        const scoreStrB = `${scoreB ?? ''}:${scoreA ?? ''}`;
-    
+                
+                        const scoreStrA = `${scoreA}:${scoreB}`;
+                        const scoreStrB = `${scoreB}:${scoreA}`;
+                
+                        // Store the results
                         results[`${teamA}-${teamB}`] = { result: scoreStrA, points: pointsA };
                         results[`${teamB}-${teamA}`] = { result: scoreStrB, points: pointsB };
                     }
