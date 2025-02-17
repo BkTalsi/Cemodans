@@ -50,10 +50,10 @@
                         let pointsB = 0;
                         
                         if (scoreA !== undefined && scoreB !== undefined) {
-                            if (zeroIndic !== "1A") {
+                            if (zeroIndic === "1A") {
                                 pointsA = 0;  // Team A gets 0 points
                                 pointsB = 2;  // Team B gets 2 points
-                            } else if (zeroIndic !== "1B") {
+                            } else if (zeroIndic === "1B") {
                                 pointsA = 2;  // Team A gets 2 points
                                 pointsB = 0;  // Team B gets 0 points
                             } else {
