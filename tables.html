@@ -31,8 +31,13 @@
                     const scoreB = row.c[6]?.v;
 
                     if (teamA && teamB) {
-                        results[`${teamA}-${teamB}`] = `${scoreA}:${scoreB}`;
-                        results[`${teamB}-${teamA}`] = `${scoreB}:${scoreA}`;
+                        const scoreStrA = `${scoreA}:${scoreB}`;
+                        const scoreStrB = `${scoreB}:${scoreA}`;
+                        const pointsA = scoreA > scoreB ? 2 : 1;
+                        const pointsB = scoreB > scoreA ? 2 : 1;
+
+                        results[`${teamA}-${teamB}`] = { result: scoreStrA, points: pointsA };
+                        results[`${teamB}-${teamA}`] = { result: scoreStrB, points: pointsB };
                     }
                 });
 
@@ -48,8 +53,12 @@
                         if (rowIndex === colIndex) {
                             tableHTML += `<td class="bg-secondary"></td>`;
                         } else {
-                            const result = results[`${rowTeam}-${colTeam}`] || "";
-                            tableHTML += `<td>${result}</td>`;
+                            const match = results[`${rowTeam}-${colTeam}`];
+                            if (match) {
+                                tableHTML += `<td><strong>${match.points}</strong><br>${match.result}</td>`;
+                            } else {
+                                tableHTML += `<td></td>`;
+                            }
                         }
                     });
                     tableHTML += `<td></td><td></td></tr>`;
