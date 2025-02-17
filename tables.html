@@ -88,7 +88,9 @@
                         } else {
                             const match = results[`${rowTeam}-${colTeam}`];
                             if (match) {
-                                const displayResult = match.result === ':' ? `<strong>0</strong><br>:` : `<strong>${match.points}</strong><br>${match.result}`;
+                                const displayResult = (match.result === ':' || match.result === '0:20' || match.result === '20:0') 
+                                ? `<strong>${match.points}</strong><br>${match.result}` 
+                                : `<strong>${match.points}</strong><br>${match.result}`;
                                 tableHTML += `<td>${displayResult}</td>`;
                             } else {
                                 tableHTML += `<td><strong>0</strong><br>:</td>`;
