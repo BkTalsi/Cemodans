@@ -48,7 +48,7 @@
                         // Points assignment: If one team has "z", the other gets 2 points, the one with "z" gets 0 points
                         let pointsA = 0;
                         let pointsB = 0;
-                        
+                        console.log(zeroIndic);  
                         if (scoreA !== undefined && scoreB !== undefined) {
                             if (zeroIndic === "1A") {
                                 pointsA = 0;  // Team A gets 0 points
@@ -66,7 +66,7 @@
                                     pointsB = 2;
                                 }
                             }
-                    
+                            console.log(pointsA, pointsB); 
                             const scoreStrA = `${scoreA}:${scoreB}`;
                             const scoreStrB = `${scoreB}:${scoreA}`;
                         
