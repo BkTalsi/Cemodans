@@ -47,22 +47,23 @@
                         // Points assignment: If one team has "z", the other gets 2 points, the one with "z" gets 0 points
                         let pointsA = 0;
                         let pointsB = 0;
-                
-                        if (zA && !zB) {
-                            pointsA = 0;  // Team A gets 0 points
-                            pointsB = 2;  // Team B gets 2 points
-                        } else if (zB && !zA) {
-                            pointsA = 2;  // Team A gets 2 points
-                            pointsB = 0;  // Team B gets 0 points
-                        } else {
-                            // If there is no "z" in the results, calculate points as usual
-                            pointsA = scoreA > scoreB ? 2 : (scoreA === scoreB ? 1 : 0);
-                            pointsB = scoreB > scoreA ? 2 : (scoreA === scoreB ? 1 : 0);
+                        
+                        if (scoreA !== undefined && scoreB !== undefined) {
+                            if (zA && !zB) {
+                                pointsA = 0;  // Team A gets 0 points
+                                pointsB = 2;  // Team B gets 2 points
+                            } else if (zB && !zA) {
+                                pointsA = 2;  // Team A gets 2 points
+                                pointsB = 0;  // Team B gets 0 points
+                            } else {
+                                // If there is no "z" in the results, calculate points as usual
+                                pointsA = scoreA > scoreB ? 2 : (scoreA === scoreB ? 1 : 0);
+                                pointsB = scoreB > scoreA ? 2 : (scoreA === scoreB ? 1 : 0);
+                            }
+                    
+                            const scoreStrA = `${scoreA}:${scoreB}`;
+                            const scoreStrB = `${scoreB}:${scoreA}`;
                         }
-                
-                        const scoreStrA = `${scoreA}:${scoreB}`;
-                        const scoreStrB = `${scoreB}:${scoreA}`;
-                
                         // Store the results
                         results[`${teamA}-${teamB}`] = { result: scoreStrA, points: pointsA };
                         results[`${teamB}-${teamA}`] = { result: scoreStrB, points: pointsB };
