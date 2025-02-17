@@ -24,11 +24,11 @@
                 const results = {};
 
                 rows.forEach(row => {
-                    const matchID = row.c[0]?.v;
                     const teamA = row.c[4]?.v;
                     const teamB = row.c[7]?.v;
-                    const scoreA = row.c[5]?.v;
-                    const scoreB = row.c[6]?.v;
+                    let scoreA = row.c[5]?.v;
+                    let scoreB = row.c[6]?.v;
+
                     const zA = scoreA === 'z';
                     const zB = scoreB === 'z';
 
@@ -40,26 +40,12 @@
                             scoreA = 20;
                             scoreB = 0;
                         }
-                        
+
                         const scoreStrA = `${scoreA ?? ''}:${scoreB ?? ''}`;
                         const scoreStrB = `${scoreB ?? ''}:${scoreA ?? ''}`;
 
                         const pointsA = zA ? 0 : (scoreA > scoreB ? 2 : 1);
                         const pointsB = zB ? 0 : (scoreB > scoreA ? 2 : 1);
-
-                        
-                        // if (scoreA !== undefined && scoreB !== undefined) {
-                        //     scoreStrA = `${scoreA}:${scoreB}`;
-                        //     scoreStrB = `${scoreB}:${scoreA}`;
-
-                        //     if (flagA === 'z' || flagB === 'z') {
-                        //         pointsA = 0;
-                        //         pointsB = 0;
-                        //     } else {
-                        //         pointsA = scoreA > scoreB ? 2 : scoreA < scoreB ? 1 : 0;
-                        //         pointsB = scoreB > scoreA ? 2 : scoreB < scoreA ? 1 : 0;
-                        //     }
-                        // }
 
                         results[`${teamA}-${teamB}`] = { result: scoreStrA, points: pointsA };
                         results[`${teamB}-${teamA}`] = { result: scoreStrB, points: pointsB };
@@ -80,7 +66,8 @@
                         } else {
                             const match = results[`${rowTeam}-${colTeam}`];
                             if (match) {
-                                tableHTML += `<td><strong>${match.points}</strong><br>${match.result}</td>`;
+                                const displayResult = match.result === ':' ? ':<br>0' : `<strong>${match.points}</strong><br>${match.result}`;
+                                tableHTML += `<td>${displayResult}</td>`;
                             } else {
                                 tableHTML += `<td><strong>0</strong><br>:</td>`;
                             }
