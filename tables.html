@@ -34,12 +34,26 @@
 
                     if (teamA && teamB) {
                         if (zA && !zB) {
-                            scoreA = 0;
-                            scoreB = 20;
-                        } else if (zB && !zA) {
-                            scoreA = 20;
-                            scoreB = 0;
-                        }
+                        scoreA = 0;
+                        scoreB = 20;
+                    } else if (zB && !zA) {
+                        scoreA = 20;
+                        scoreB = 0;
+                    }
+                    
+                    // Adjust points for 'z' cases
+                    const pointsA = zA ? 0 : (scoreA > scoreB ? 2 : 1);
+                    const pointsB = zB ? 0 : (scoreB > scoreA ? 2 : 1);
+                    
+                    // If one is 'z', ensure correct points assignment
+                    if (zA && !zB) {
+                        pointsA = 0;
+                        pointsB = 2;
+                    }
+                    if (zB && !zA) {
+                        pointsA = 2;
+                        pointsB = 0;
+                    }
 
                         const scoreStrA = `${scoreA ?? ''}:${scoreB ?? ''}`;
                         const scoreStrB = `${scoreB ?? ''}:${scoreA ?? ''}`;
@@ -66,7 +80,7 @@
                         } else {
                             const match = results[`${rowTeam}-${colTeam}`];
                             if (match) {
-                                const displayResult = match.result === ':' ? ':<br>0' : `<strong>${match.points}</strong><br>${match.result}`;
+                                const displayResult = match.result === ':' ? `<strong>0</strong><br>:` : `<strong>${match.points}</strong><br>${match.result}`;
                                 tableHTML += `<td>${displayResult}</td>`;
                             } else {
                                 tableHTML += `<td><strong>0</strong><br>:</td>`;
