@@ -11,98 +11,89 @@
     <script>
         const sheetID = "1TpX7oRId-a7WD1PFH7aJoR9y6ConYYIWwWOYwMOmO-k";
         const gid = "1378510021";
-        const query = encodeURIComponent("select A,B,C,D,E,I,H,M"); // Fetch the relevant columns (K contains the URLs)
+        const query = encodeURIComponent("select A,B,C,M,N,O");
         const apiURL = `https://docs.google.com/spreadsheets/d/${sheetID}/gviz/tq?tqx=out:json&gid=${gid}&tq=${query}`;
-        
+
         async function fetchData() {
             try {
-                
                 const response = await fetch(apiURL);
                 const text = await response.text();
-                const jsonText = text.match(/\{.*\}/s)?.[0]; 
+                const jsonText = text.match(/\{.*\}/s)?.[0];
                 if (!jsonText) return;
 
                 const data = JSON.parse(jsonText);
-                console.log(data.table.rows);
-                const headers = data.table.cols.filter((_, index) => index !== 7).map(col => col.label || "");
-                
-                function formatCell(cell, rowIndex, colIndex) {
-                    if (!cell || cell.v === undefined) return ""; // Empty cell
+                const rows = data.table.rows;
 
-                    if (cell.f) return cell.f; // If Google provides formatted text, use it
-                    
-                    // Check if the cell contains a URL in column K (or other designated column)
-                    if (rowIndex >= 0 && colIndex === 5) {  // Apply only to column I (index 5)
-                        const urlCell = data.table.rows[rowIndex]?.c[7]; // Correct index for column M
-                        console.log(`Row ${rowIndex}, Column I:`, cell.v);  
-                        console.log(`Row ${rowIndex}, URL column:`, urlCell?.v);  
-                        if (urlCell && urlCell.v) {
-                            return `<a href="${urlCell.v}" target="_blank">${cell.v}</a>`;
-                        }
-                    }
+                // Separate rows into two tables
+                const threePointRows = rows.map(row => row.c.slice(0, 3).map(cell => cell?.v || ""));
+                const freeThrowRows = rows.map(row => row.c.slice(3, 6).map(cell => cell?.v || ""));
 
+                // Generate tables
+                const createTable = (headers, rows) => {
+                    let table = `<table class="table table-striped table-bordered">
+                                    <thead class="table-dark"><tr>`;
+                    headers.forEach(header => table += `<th>${header}</th>`);
+                    table += `</tr></thead><tbody>`;
 
-                    return cell.v; // Normal text
-                }
+                    rows.forEach(row => {
+                        table += "<tr>";
+                        row.forEach(cell => table += `<td>${cell}</td>`);
+                        table += "</tr>";
+                    });
 
-                const rows = data.table.rows.map((row, rowIndex) => 
-                    row.c.filter((_, colIndex) => colIndex !== 7) // Exclude column M (index 7)
-                        .map((cell, colIndex) => formatCell(cell, rowIndex, colIndex))
-                );
+                    table += "</tbody></table>";
+                    return table;
+                };
 
+                document.getElementById("three-point-container").innerHTML = createTable(["Komanda", "Spēlētājs", "Rezultāts"], threePointRows);
+                document.getElementById("free-throw-container").innerHTML = createTable(["Komanda", "Spēlētājs", "Rezultāts"], freeThrowRows);
 
-                // Generate table
-                let table = `<table class="table table-striped table-bordered mt-3">
-                                <thead class="table-dark"><tr>`;
-                headers.forEach(header => table += `<th>${header}</th>`);
-                table += `</tr></thead><tbody>`;
-
-                rows.forEach(row => {
-                    table += "<tr>";
-                    //row.forEach(cell => table += `<td>${cell}</td>`);
-                    row.forEach(cell => table += `<td>${cell instanceof String ? cell : cell.toString()}</td>`);
-                    table += "</tr>";
-                });
-
-                table += "</tbody></table>";
-
-                document.getElementById("table-container").innerHTML = table;
             } catch (error) {
                 console.error("Error fetching data:", error);
             }
         }
-        
-        setInterval(fetchData, 5000); // Refresh data every 5 seconds
-        window.onload = fetchData; // Fetch data when the page loads
+
+        setInterval(fetchData, 5000);
+        window.onload = fetchData;
     </script>
 </head>
 <body class="bg-light">
     <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
-    <div class="container">
-        <a class="navbar-brand" href="index.html">🏆 Čemodāna Kauss</a>
-        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
-            <span class="navbar-toggler-icon"></span>
-        </button>
-        <div class="collapse navbar-collapse" id="navbarNav">
-            <ul class="navbar-nav">
-                <li class="nav-item">
-                    <a class="nav-link" href="index.html">🏠 Home</a>
-                </li>
-                <li class="nav-item">
-                    <a class="nav-link" href="tables.html">📊 Talsi 2025</a>
-                </li>
-                <li class="nav-item">
-                    <a class="nav-link" href="FreeShots.html">Metienu konkurss</a>
-                </li>
-            </ul>
+        <div class="container">
+            <a class="navbar-brand" href="index.html">🏆 Čemodāna Kauss</a>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarNav">
+                <ul class="navbar-nav">
+                    <li class="nav-item">
+                        <a class="nav-link" href="index.html">🏠 Home</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="tables.html">📊 Talsi 2025</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="FreeShots.html">Metienu konkurss</a>
+                    </li>
+                </ul>
+            </div>
         </div>
-    </div>
     </nav>
 
     <div class="container mt-5">
-        <h2 class="text-center">📊 Čemodāna kauss</h2>
-        <h3 class="text-center">Talsi, 2025</h3>
-        <div id="table-container" class="mt-4"></div>
+        <div class="row">
+            <!-- Left side: 3-punktu metieni -->
+            <div class="col-md-6">
+                <h3 class="text-center">🏀 3-punktu metieni</h3>
+                <div id="three-point-container" class="mt-3"></div>
+            </div>
+
+            <!-- Right side: Soda metieni -->
+            <div class="col-md-6">
+                <h3 class="text-center">🎯 Soda metieni</h3>
+                <div id="free-throw-container" class="mt-3"></div>
+            </div>
+        </div>
     </div>
 </body>
 </html>
