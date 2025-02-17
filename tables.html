@@ -29,27 +29,37 @@
                     const teamB = row.c[7]?.v;
                     const scoreA = row.c[5]?.v;
                     const scoreB = row.c[6]?.v;
-                    const flagA = row.c[5]?.v;
-                    const flagB = row.c[6]?.v;
+                    const zA = scoreA === 'z';
+                    const zB = scoreB === 'z';
 
                     if (teamA && teamB) {
-                        let pointsA = 0;
-                        let pointsB = 0;
-                        let scoreStrA = ":";
-                        let scoreStrB = ":";
-
-                        if (scoreA !== undefined && scoreB !== undefined) {
-                            scoreStrA = `${scoreA}:${scoreB}`;
-                            scoreStrB = `${scoreB}:${scoreA}`;
-
-                            if (flagA === 'z' || flagB === 'z') {
-                                pointsA = 0;
-                                pointsB = 0;
-                            } else {
-                                pointsA = scoreA > scoreB ? 2 : scoreA < scoreB ? 1 : 0;
-                                pointsB = scoreB > scoreA ? 2 : scoreB < scoreA ? 1 : 0;
-                            }
+                        if (zA && !zB) {
+                            scoreA = 0;
+                            scoreB = 20;
+                        } else if (zB && !zA) {
+                            scoreA = 20;
+                            scoreB = 0;
                         }
+                        
+                        const scoreStrA = `${scoreA ?? ''}:${scoreB ?? ''}`;
+                        const scoreStrB = `${scoreB ?? ''}:${scoreA ?? ''}`;
+
+                        const pointsA = zA ? 0 : (scoreA > scoreB ? 2 : 1);
+                        const pointsB = zB ? 0 : (scoreB > scoreA ? 2 : 1);
+
+                        
+                        // if (scoreA !== undefined && scoreB !== undefined) {
+                        //     scoreStrA = `${scoreA}:${scoreB}`;
+                        //     scoreStrB = `${scoreB}:${scoreA}`;
+
+                        //     if (flagA === 'z' || flagB === 'z') {
+                        //         pointsA = 0;
+                        //         pointsB = 0;
+                        //     } else {
+                        //         pointsA = scoreA > scoreB ? 2 : scoreA < scoreB ? 1 : 0;
+                        //         pointsB = scoreB > scoreA ? 2 : scoreB < scoreA ? 1 : 0;
+                        //     }
+                        // }
 
                         results[`${teamA}-${teamB}`] = { result: scoreStrA, points: pointsA };
                         results[`${teamB}-${teamA}`] = { result: scoreStrB, points: pointsB };
