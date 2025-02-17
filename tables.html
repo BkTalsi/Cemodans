@@ -33,18 +33,18 @@
                     const zB = scoreB === 'z';
                 
                     if (teamA && teamB) {
-                        // If only team A has 'z'
+                        // When team A has "z" and team B does not
                         if (zA && !zB) {
                             scoreA = 0;
-                            scoreB = 20;
+                            scoreB = 20; // Score should be 0:20
                         }
-                        // If only team B has 'z'
+                        // When team B has "z" and team A does not
                         else if (zB && !zA) {
                             scoreA = 20;
-                            scoreB = 0;
+                            scoreB = 0; // Score should be 20:0
                         }
                 
-                        // Now calculate the points
+                        // Points assignment: If one team has "z", the other gets 2 points, the one with "z" gets 0 points
                         let pointsA = 0;
                         let pointsB = 0;
                 
@@ -55,6 +55,7 @@
                             pointsA = 2;  // Team A gets 2 points
                             pointsB = 0;  // Team B gets 0 points
                         } else {
+                            // If there is no "z" in the results, calculate points as usual
                             pointsA = scoreA > scoreB ? 2 : (scoreA === scoreB ? 1 : 0);
                             pointsB = scoreB > scoreA ? 2 : (scoreA === scoreB ? 1 : 0);
                         }
@@ -67,6 +68,7 @@
                         results[`${teamB}-${teamA}`] = { result: scoreStrB, points: pointsB };
                     }
                 });
+
 
 
                 let tableHTML = `<table class="table table-bordered text-center">
