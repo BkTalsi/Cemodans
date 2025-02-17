@@ -33,27 +33,30 @@
                     const zB = scoreB === 'z';
                 
                     if (teamA && teamB) {
-                        // Handle 'z' cases
+                        // If only team A has 'z'
                         if (zA && !zB) {
                             scoreA = 0;
                             scoreB = 20;
-                        } else if (zB && !zA) {
+                        }
+                        // If only team B has 'z'
+                        else if (zB && !zA) {
                             scoreA = 20;
                             scoreB = 0;
                         }
                 
-                        // Adjust points based on the scores
-                        let pointsA = zA ? 0 : (scoreA > scoreB ? 2 : (scoreA === scoreB ? 1 : 0));
-                        let pointsB = zB ? 0 : (scoreB > scoreA ? 2 : (scoreA === scoreB ? 1 : 0));
+                        // Now calculate the points
+                        let pointsA = 0;
+                        let pointsB = 0;
                 
-                        // If one team is 'z', they get 0 points, and the other gets 2 points
                         if (zA && !zB) {
-                            pointsA = 0;
-                            pointsB = 2;
-                        }
-                        if (zB && !zA) {
-                            pointsA = 2;
-                            pointsB = 0;
+                            pointsA = 0;  // Team A gets 0 points
+                            pointsB = 2;  // Team B gets 2 points
+                        } else if (zB && !zA) {
+                            pointsA = 2;  // Team A gets 2 points
+                            pointsB = 0;  // Team B gets 0 points
+                        } else {
+                            pointsA = scoreA > scoreB ? 2 : (scoreA === scoreB ? 1 : 0);
+                            pointsB = scoreB > scoreA ? 2 : (scoreA === scoreB ? 1 : 0);
                         }
                 
                         const scoreStrA = `${scoreA}:${scoreB}`;
@@ -64,6 +67,7 @@
                         results[`${teamB}-${teamA}`] = { result: scoreStrB, points: pointsB };
                     }
                 });
+
 
                 let tableHTML = `<table class="table table-bordered text-center">
                                     <thead>
