@@ -28,31 +28,32 @@
                     const teamB = row.c[7]?.v;
                     let scoreA = row.c[5]?.v;
                     let scoreB = row.c[6]?.v;
-                
-                    const zA = scoreA === 'z';
-                    const zB = scoreB === 'z';
+                    let zeroIndic = row.c[11]?.v;
+                    
+                    // const zA = scoreA === 'z';
+                    // const zB = scoreB === 'z';
                 
                     if (teamA && teamB) {
                         // When team A has "z" and team B does not
-                        if (zA && !zB) {
-                            scoreA = 0;
-                            scoreB = 20; // Score should be 0:20
-                        }
-                        // When team B has "z" and team A does not
-                        else if (zB && !zA) {
-                            scoreA = 20;
-                            scoreB = 0; // Score should be 20:0
-                        }
+                        // if (zA && !zB) {
+                        //     scoreA = 0;
+                        //     scoreB = 20; // Score should be 0:20
+                        // }
+                        // // When team B has "z" and team A does not
+                        // else if (zB && !zA) {
+                        //     scoreA = 20;
+                        //     scoreB = 0; // Score should be 20:0
+                        // }
                 
                         // Points assignment: If one team has "z", the other gets 2 points, the one with "z" gets 0 points
                         let pointsA = 0;
                         let pointsB = 0;
                         
                         if (scoreA !== undefined && scoreB !== undefined) {
-                            if (zA && !zB) {
+                            if (zeroIndic !== "1A") {
                                 pointsA = 0;  // Team A gets 0 points
                                 pointsB = 2;  // Team B gets 2 points
-                            } else if (zB && !zA) {
+                            } else if (zeroIndic !== "1B") {
                                 pointsA = 2;  // Team A gets 2 points
                                 pointsB = 0;  // Team B gets 0 points
                             } else {
