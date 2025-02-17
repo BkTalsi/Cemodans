@@ -57,8 +57,8 @@
                                 pointsB = 0;  // Team B gets 0 points
                             } else {
                                 // If there is no "z" in the results, calculate points as usual
-                                pointsA = scoreA > scoreB ? 2 : (scoreA === scoreB ? 1 : 0);
-                                pointsB = scoreB > scoreA ? 2 : (scoreA === scoreB ? 1 : 0);
+                                pointsA = scoreA > scoreB ? 2 : 1;
+                                pointsB = scoreB > scoreA ? 2 : 1;
                             }
                     
                             const scoreStrA = `${scoreA}:${scoreB}`;
