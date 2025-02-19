@@ -51,7 +51,7 @@
                     // const zA = scoreA === 'z';
                     // const zB = scoreB === 'z';
                 
-                    if (teamA && teamB) {
+                    if (teamA && teamB && !results[`${teamA}-${teamB}`]) {
                         // When team A has "z" and team B does not
                         // if (zA && !zB) {
                         //     scoreA = 0;
