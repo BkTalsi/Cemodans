@@ -119,8 +119,10 @@
                             const match = results[`${rowTeam}-${colTeam}`];
                             if (match) {
                                 const displayResult = (match.result === ':' || match.result === '0:20' || match.result === '20:0') 
-                                ? `<strong>${match.points}</strong><br>${match.result}` 
-                                : `<strong>${match.points}</strong><br>${match.result}`;
+                                //? `<strong>${match.points}</strong><br>${match.result}` 
+                                //: `<strong>${match.points}</strong><br>${match.result}`;
+                                ? `<strong ${match.points === 2 ? 'style="color: red;"' : ''}>${match.points}</strong><br>${match.result}`
+                                : `<strong ${match.points === 2 ? 'style="color: red;"' : ''}>${match.points}</strong><br>${match.result}`;
                                 tableHTML += `<td>${displayResult}</td>`;
                             } else {
                                 tableHTML += `<td><strong>0</strong><br>:</td>`;
