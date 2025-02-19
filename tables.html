@@ -27,7 +27,10 @@
                 const data = JSON.parse(jsonText);
                 const rows = data.table.rows;
                 const results = {};
-
+                const teamPoints = {}; // Object to store total points
+                
+                teams.forEach(team => teamPoints[team] = 0); // Initialize all teams with 0 points
+                
                 rows.forEach(row => {
                     const teamA = row.c[4]?.v;
                     const teamB = row.c[7]?.v;
@@ -86,6 +89,10 @@
                         // Store the results
                         results[`${teamA}-${teamB}`] = { result: scoreStrA, points: pointsA };
                         results[`${teamB}-${teamA}`] = { result: scoreStrB, points: pointsB };
+
+                        // Accumulate total points for each team
+                        teamPoints[teamA] += pointsA;
+                        teamPoints[teamB] += pointsB;
                         }
                     }
                 });
@@ -94,12 +101,17 @@
 
                 let tableHTML = `<table class="table table-bordered text-center">
                                     <thead>
-                                        <tr><th></th>${teams.map(t => `<th>${t}</th>`).join('')}<th>PUNKTI</th><th>VIETA</th></tr>
+                                        <tr>
+                                            <th></th>${teams.map(t => `<th>${t}</th>`).join('')}
+                                            <th>PUNKTI</th>
+                                            <th>VIETA</th>
+                                        </tr>
                                     </thead>
                                     <tbody>`;
 
                 teams.forEach((rowTeam, rowIndex) => {
                     tableHTML += `<tr><th>${rowTeam}</th>`;
+                    //tableHTML += `<th>${rowTeam}</th><tr><td><strong>${teamPoints[rowTeam]}</strong></td>`; // Added left column
                     teams.forEach((colTeam, colIndex) => {
                         if (rowIndex === colIndex) {
                             tableHTML += `<td class="bg-secondary"></td>`;
@@ -115,7 +127,8 @@
                             }
                         }
                     });
-                    tableHTML += `<td></td><td></td></tr>`;
+                    // tableHTML += `<td></td><td></td></tr>`;
+                    tableHTML += `<td><strong>${teamPoints[rowTeam]}</strong></td></tr>`; // Right-most column for points
                 });
 
                 tableHTML += `</tbody></table>`;
