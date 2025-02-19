@@ -91,8 +91,11 @@
                         results[`${teamB}-${teamA}`] = { result: scoreStrB, points: pointsB };
 
                         // Accumulate total points for each team
-                        teamPoints[teamA] += pointsA;
-                        teamPoints[teamB] += pointsB;
+                        if (!results[`${teamA}-${teamB}`].counted) { // Prevent double-counting
+                            teamPoints[teamA] += pointsA;
+                            teamPoints[teamB] += pointsB;
+                            results[`${teamA}-${teamB}`].counted = true; // Mark as counted
+                        }
                         }
                     }
                 });
@@ -114,7 +117,9 @@
                     //tableHTML += `<th>${rowTeam}</th><tr><td><strong>${teamPoints[rowTeam]}</strong></td>`; // Added left column
                     teams.forEach((colTeam, colIndex) => {
                         if (rowIndex === colIndex) {
-                            tableHTML += `<td class="bg-secondary"></td>`;
+                            tableHTML += `<td class="bg-secondary">
+                                            <img src="https://yt3.ggpht.com/a/AATXAJyNDemxMgOg2xMaRn3iP1yAErMEn_OWbi-gbQ=s900-c-k-c0xffffffff-no-rj-mo" alt="Icon" width="30">
+                                        </td>`;
                         } else {
                             const match = results[`${rowTeam}-${colTeam}`];
                             if (match) {
