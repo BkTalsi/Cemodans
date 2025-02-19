@@ -91,12 +91,12 @@
                         results[`${teamA}-${teamB}`] = { result: scoreStrA, points: pointsA };
                         results[`${teamB}-${teamA}`] = { result: scoreStrB, points: pointsB };
 
-                        // Accumulate total points for each team
-                        if (!results[`${teamA}-${teamB}`].counted) { // Prevent double-counting
-                            teamPoints[teamA] += pointsA;
-                            teamPoints[teamB] += pointsB;
-                            results[`${teamA}-${teamB}`].counted = true; // Mark as counted
-                        }
+                        if (!teamPoints[teamA]) teamPoints[teamA] = 0;
+                        if (!teamPoints[teamB]) teamPoints[teamB] = 0;
+                    
+                        teamPoints[teamA] += pointsA;
+                        teamPoints[teamB] += pointsB;
+                        console.log(`${teamA} vs ${teamB}: ${pointsA} - ${pointsB}`);
                         }
                     }
                 });
