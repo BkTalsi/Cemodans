@@ -11,6 +11,7 @@
     object-fit: cover; /* Ensure the image scales properly */
 }
 
+
 .my-table {
     width: 100%;            /* Ensures table stretches to full width */
     table-layout: fixed;     /* Forces equal column widths */
@@ -19,5 +20,17 @@
     text-align: center;      /* Centers text (optional) */
     padding: 10px;           /* Adds spacing (optional) */
     border: 1px solid #ddd;  /* Optional border */
+}
+
+
+.custom-navbar {
+    background-color: #027669 !important;  /* Changes navbar color */
+}
+
+.custom-footer {
+    background-color: #027669 !important;  /* Changes footer color */
+    color: white;  /* Ensures text is readable */
+    padding: 10px; /* Adds spacing */
+    text-align: center;
 }
 
