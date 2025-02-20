@@ -102,7 +102,7 @@
                         teams.forEach((colTeam, colIndex) => {
                             if (rowIndex === colIndex) {
                                 tableHTML += `<td>
-                                            <img src="https://raw.githubusercontent.com/xxonara/Basket/main/bk%20talsi.jpg" style="height: 100%;">
+                                            <img src="https://raw.githubusercontent.com/xxonara/Basket/main/bk%20talsi.jpg" style="max-width: 100%; max-height: 100%; object-fit: contain;">
                                         </td>`;
                             } else {
                                 const match = results[`${rowTeam}-${colTeam}`];
