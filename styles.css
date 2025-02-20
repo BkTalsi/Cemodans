@@ -11,38 +11,30 @@
     object-fit: cover; /* Ensure the image scales properly */
 }
 
-/* Ensure both tables are equal width */
-.table-container {
-    display: flex;
-    justify-content: center; /* Centers tables */
-    gap: 20px; /* Space between tables */
-    flex-wrap: wrap; /* Ensures responsiveness */
+/* ----- Tables - Make All Columns Equal Width ----- */
+.table {
     width: 100%;
-}
-
-/* Table Style */
-.my-table {
-    width: auto; /* Allows table to fit content */
-    min-width: 100%; /* Ensures table stretches */
-    table-layout: auto; /* Adjusts column width dynamically */
+    table-layout: fixed; /* Ensures all columns are the same width */
     border-collapse: collapse;
 }
 
-/* Set Columns to Equal Width of the Longest One */
-.my-table th, .my-table td {
-    white-space: nowrap; /* Prevents wrapping */
+/* Apply consistent width to all columns */
+.table th, .table td {
     text-align: center;
     padding: 10px;
     border: 1px solid #ddd;
+    width: 10%; /* Forces equal width */
+    white-space: nowrap; /* Prevents text from wrapping */
 }
 
 /* Responsive Table */
 @media (max-width: 768px) {
-    .table-container {
-        flex-direction: column; /* Stacks tables on smaller screens */
+    .table {
+        font-size: 12px; /* Make text smaller on small screens */
     }
+}
     
-    .my-table {
+.my-table {
         width: 100%; /* Ensures table fits screen */
     }
 }
