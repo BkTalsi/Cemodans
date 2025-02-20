@@ -10,10 +10,10 @@
 }
 
 /* .diagonal-cell img {
-    width: 100%;  /* Make the image fill the entire cell width */
-    height: 100%; /* Make the image fill the entire cell height */
-    object-fit: contain; /* Ensure the image scales properly */
-} */
+/*     width: 100%;  /* Make the image fill the entire cell width */
+/*     height: 100%; /* Make the image fill the entire cell height */
+/*     object-fit: contain; /* Ensure the image scales properly */ */ */ */
+/* } */ */
 
 /* ----- Tables - Make All Columns Equal Width ----- */
 .table {
