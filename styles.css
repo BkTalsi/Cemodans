@@ -15,7 +15,7 @@
 .image-cell {
             background-image:
 url('https://raw.githubusercontent.com/xxonara/Basket/main/bk%20talsi.jpg');
-            background-size: contain;
+            background-size: scale-down;
             background-position: center;
             background-repeat: no-repeat;
             height: 50px; }
@@ -43,6 +43,10 @@ url('https://raw.githubusercontent.com/xxonara/Basket/main/bk%20talsi.jpg');
     font-size: 14px; /* Adjust text size for better fit */
     min-height: 50px;
     height: auto; /* Reduce row height */
+    overflow: hidden;
+    white-space: normal; /* Allows text to wrap */
+    word-wrap: break-word; /* Ensures long words break properly */
+    overflow-wrap: break-word; /* Ensures text breaks within the cell */
 }
 
 /* ----- Responsive Adjustments ----- */
