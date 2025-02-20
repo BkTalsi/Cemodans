@@ -3,12 +3,16 @@
     height: 100px; /* Adjust to match your table cell height */
     width: 100px; /* Adjust for square shape */
     text-align: center; /* Center the image */
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 0; /* Remove extra space */
 }
 
 /* .diagonal-cell img {
     width: 100%;  /* Make the image fill the entire cell width */
     height: 100%; /* Make the image fill the entire cell height */
-    object-fit: cover; /* Ensure the image scales properly */
+    object-fit: contain; /* Ensure the image scales properly */
 } */
 
 /* ----- Tables - Make All Columns Equal Width ----- */
@@ -26,13 +30,7 @@
     width: 10%; /* Ensures equal column width */
     white-space: nowrap; /* Prevents text wrapping */
     font-size: 14px; /* Adjust text size for better fit */
-    height: 30px; /* Reduce row height */
-}
-
-/* Reduce diagonal cell size */
-.diagonal-cell img {
-    width: 15px;
-    height: 15px;
+    height: auto; /* Reduce row height */
 }
 
 /* ----- Responsive Adjustments ----- */
