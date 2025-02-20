@@ -55,7 +55,7 @@ url('https://raw.githubusercontent.com/xxonara/Basket/main/bk%20talsi.jpg');
 .custom-navbar {
     background-color: #027669 !important; /* Teal */
     color: white !important;
-    padding-top: 0px; /* Adjust the space above the navbar */
+    padding-top: 1px; /* Adjust the space above the navbar */
 }
 
 .navbar-nav .nav-item {
