@@ -53,7 +53,7 @@
 }
 
 .navbar-nav .nav-item {
-    margin-top: 20px; /* Add space between navigation items */
+    margin-top: 30px; /* Add space between navigation items */
 }
 
 .custom-navbar .navbar-brand,
@@ -63,7 +63,7 @@
 }
 
 .custom-navbar .navbar-brand {
-    margin-right: 30px; /* Adjust this value to create more space */
+    margin-right: 50px; /* Adjust this value to create more space */
 }
 
 .custom-navbar .nav-link:hover {
