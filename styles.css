@@ -1,7 +1,7 @@
 .diagonal-cell {
     background-color: #027669 !important; /* Set background color */
-    height: 100px; /* Adjust to match your table cell height */
-    width: 100px; /* Adjust for square shape */
+    height: 100%; /* Adjust to match your table cell height */
+    width: 100%; /* Adjust for square shape */
     text-align: center; /* Center the image */
     display: flex;
     align-items: center;
@@ -29,7 +29,7 @@
     padding: 5px; /* Reduce padding for a more compact table */
     text-align: center;
     border: 1px solid #ddd;
-    width: 10%; /* Ensures equal column width */
+    width: 15%; /* Ensures equal column width */
     white-space: nowrap; /* Prevents text wrapping */
     font-size: 14px; /* Adjust text size for better fit */
     height: auto; /* Reduce row height */
