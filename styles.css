@@ -49,7 +49,7 @@
 .custom-navbar {
     background-color: #027669 !important; /* Teal */
     color: white !important;
-    padding-top: 5px; /* Adjust the space above the navbar */
+    padding-top: 0px; /* Adjust the space above the navbar */
 }
 
 .navbar-nav .nav-item {
@@ -60,7 +60,7 @@
 .custom-navbar .nav-link {
     color: white !important;
     opacity: 1 !important; /* Removes transparency */
-     margin-right: 50px;
+     margin-right: 30px;
 }
 
 /* .custom-navbar .navbar-brand {
