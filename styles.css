@@ -52,21 +52,8 @@ url('https://raw.githubusercontent.com/xxonara/Basket/main/bk%20talsi.jpg');
     }
 }
 
-.custom-navbar {
-    background-color: #027669 !important; /* Teal */
-    color: white !important;
-    padding-top: 1px; /* Adjust the space above the navbar */
-}
-
 .navbar-nav .nav-item {
     margin-right: 30px; /* Add space between navigation items */
-}
-
-.custom-navbar .navbar-brand,
-.custom-navbar .nav-link {
-    color: white !important;
-    opacity: 1 !important; /* Removes transparency */
-     margin-right: 30px;
 }
 
 /* .custom-navbar .navbar-brand {
@@ -84,5 +71,20 @@ url('https://raw.githubusercontent.com/xxonara/Basket/main/bk%20talsi.jpg');
     padding: 15px;
     margin-top: 20px;
 }
+.custom-navbar {
+    background-color: #027669 !important; /* Ensure it applies */
+    color: white !important;
+    padding-top: 1px !important;
+}
 
+.custom-navbar .navbar-brand,
+.custom-navbar .nav-link {
+    color: white !important;
+    opacity: 1 !important; /* Ensure full opacity */
+    margin-right: 30px !important;
+}
+
+.custom-navbar .navbar-nav .nav-item .nav-link {
+    color: white !important; /* Override Bootstrap styles */
+}
 
