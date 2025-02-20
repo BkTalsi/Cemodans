@@ -57,6 +57,10 @@
     opacity: 1 !important; /* Removes transparency */
 }
 
+.custom-navbar .navbar-brand {
+    margin-right: 30px; /* Adjust this value to create more space */
+}
+
 .custom-navbar .nav-link:hover {
     color: #f8f9fa !important; /* Lighten on hover */
 }
