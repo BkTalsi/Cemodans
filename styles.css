@@ -44,12 +44,14 @@
     }
 }
 
-
-
-
-.custom-navbar, .custom-footer {
+.custom-navbar {
     background-color: #027669 !important; /* Teal */
     color: white !important;
+    padding-top: 20px; /* Adjust the space above the navbar */
+}
+
+.navbar-nav .nav-item {
+    margin-top: 10px; /* Add space between navigation items */
 }
 
 .custom-navbar .navbar-brand,
@@ -63,6 +65,8 @@
 }
 
 .custom-footer {
+    background-color: #027669 !important; /* Teal */
+    color: white !important;
     text-align: center;
     padding: 15px;
     margin-top: 20px;
