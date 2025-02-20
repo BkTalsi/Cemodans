@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Google Maps Address Display</title>
+    <style>
+        #map {
+            height: 100%;
+            width: 100%;
+        }
+        html, body {
+            height: 100%;
+            margin: 0;
+            padding: 0;
+        }
+    </style>
+</head>
+<body>
+    <h1>Google Maps - Address Display</h1>
+    <div id="map"></div>
+
+    <script>
+        function initMap() {
+            // Replace with your address
+            var address = '1600 Amphitheatre Parkway, Mountain View, CA';
+            
+            // Geocoder to convert the address into latitude and longitude
+            var geocoder = new google.maps.Geocoder();
+
+            // Create a map centered at a default location
+            var map = new google.maps.Map(document.getElementById("map"), {
+                zoom: 14,
+                center: { lat: 37.7749, lng: -122.4194 }, // Default center (San Francisco)
+            });
+
+            // Geocode the address and place a marker
+            geocoder.geocode({ 'address': address }, function (results, status) {
+                if (status === 'OK') {
+                    map.setCenter(results[0].geometry.location);
+                    var marker = new google.maps.Marker({
+                        map: map,
+                        position: results[0].geometry.location,
+                    });
+                } else {
+                    alert("Geocode was not successful for the following reason: " + status);
+                }
+            });
+        }
+    </script>
+
+    <!-- Google Maps API Key (replace 'YOUR_API_KEY' with your actual key) -->
+    <script src="https://maps.googleapis.com/maps/api/js?key=YOUR_API_KEY&callback=initMap" async defer></script>
+</body>
+</html>
