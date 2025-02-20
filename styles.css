@@ -9,11 +9,13 @@
     padding: 0; /* Remove extra space */
 }
 
-/* .diagonal-cell img {
-/*     width: 100%;  /* Make the image fill the entire cell width */
-/*     height: 100%; /* Make the image fill the entire cell height */
-/*     object-fit: contain; /* Ensure the image scales properly */ */ */ */
-/* } */ */
+.diagonal-cell img {
+    max-width: 90%; /* Prevents the image from overflowing */
+    max-height: 90%; /* Keeps it within the cell */
+    width: auto; /* Maintains aspect ratio */
+    height: auto; /* Maintains aspect ratio */
+    object-fit: contain; /* Ensures the image scales properly */
+}
 
 /* ----- Tables - Make All Columns Equal Width ----- */
 .table {
