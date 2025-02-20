@@ -5,11 +5,11 @@
     text-align: center; /* Center the image */
 }
 
-.diagonal-cell img {
+/* .diagonal-cell img {
     width: 100%;  /* Make the image fill the entire cell width */
     height: 100%; /* Make the image fill the entire cell height */
     object-fit: cover; /* Ensure the image scales properly */
-}
+} */
 
 /* ----- Tables - Make All Columns Equal Width ----- */
 .table {
@@ -18,26 +18,32 @@
     border-collapse: collapse;
 }
 
-/* Apply consistent width to all columns */
+/* ----- Make Table Rows Shorter ----- */
 .table th, .table td {
+    padding: 5px; /* Reduce padding for a more compact table */
     text-align: center;
-    padding: 10px;
     border: 1px solid #ddd;
-    width: 10%; /* Forces equal width */
-    white-space: nowrap; /* Prevents text from wrapping */
+    width: 10%; /* Ensures equal column width */
+    white-space: nowrap; /* Prevents text wrapping */
+    font-size: 14px; /* Adjust text size for better fit */
+    height: 30px; /* Reduce row height */
 }
 
-/* Responsive Table */
+/* Reduce diagonal cell size */
+.diagonal-cell img {
+    width: 15px;
+    height: 15px;
+}
+
+/* ----- Responsive Adjustments ----- */
 @media (max-width: 768px) {
-    .table {
-        font-size: 12px; /* Make text smaller on small screens */
+    .table th, .table td {
+        font-size: 12px; /* Smaller text for smaller screens */
+        padding: 3px;
+        height: 25px;
     }
 }
-    
-.my-table {
-        width: 100%; /* Ensures table fits screen */
-    }
-}
+
 
 
 
