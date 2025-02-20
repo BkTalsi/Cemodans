@@ -39,7 +39,7 @@ url('https://raw.githubusercontent.com/xxonara/Basket/main/bk%20talsi.jpg');
     text-align: center;
     border: 1px solid #ddd;
     width: 15%; /* Ensures equal column width */
-    white-space: nowrap; /* Prevents text wrapping */
+    /*white-space: nowrap; /* Prevents text wrapping */
     font-size: 14px; /* Adjust text size for better fit */
     min-height: 50px;
     height: auto; /* Reduce row height */
