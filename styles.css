@@ -11,19 +11,42 @@
     object-fit: cover; /* Ensure the image scales properly */
 }
 
-/* Fix Table Column Widths */
-.my-table {
+/* Ensure both tables are equal width */
+.table-container {
+    display: flex;
+    justify-content: center; /* Centers tables */
+    gap: 20px; /* Space between tables */
+    flex-wrap: wrap; /* Ensures responsiveness */
     width: 100%;
-    table-layout: fixed; /* Ensures equal column width */
+}
+
+/* Table Style */
+.my-table {
+    width: auto; /* Allows table to fit content */
+    min-width: 100%; /* Ensures table stretches */
+    table-layout: auto; /* Adjusts column width dynamically */
     border-collapse: collapse;
 }
 
+/* Set Columns to Equal Width of the Longest One */
 .my-table th, .my-table td {
-    width: 25%; /* Ensures equal column widths */
+    white-space: nowrap; /* Prevents wrapping */
     text-align: center;
     padding: 10px;
     border: 1px solid #ddd;
 }
+
+/* Responsive Table */
+@media (max-width: 768px) {
+    .table-container {
+        flex-direction: column; /* Stacks tables on smaller screens */
+    }
+    
+    .my-table {
+        width: 100%; /* Ensures table fits screen */
+    }
+}
+
 
 
 /* Fix Navbar & Footer Background Color */
@@ -35,6 +58,7 @@
 .custom-navbar .navbar-brand,
 .custom-navbar .nav-link {
     color: white !important;
+    opacity: 0.9;
 }
 
 /* Fix Footer Text Color */
