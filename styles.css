@@ -1,19 +1,16 @@
 .diagonal-cell {
     background-color: #027669 !important; /* Set background color */
-    height: auto; /* Adjust to match your table cell height */
-    width: auto; /* Adjust for square shape */
     text-align: center; /* Center the image */
     display: flex;
     align-items: center;
     justify-content: center;
     padding: 0; /* Remove extra space */
+    border: none;
 }
 
 .diagonal-cell img {
     max-width: 100%; /* Allow image to take full width of cell */
     max-height: 100%; /* Allow image to take full height of cell */
-    width: auto; /* Maintain aspect ratio */
-    height: auto; /* Maintain aspect ratio */
     object-fit: contain; /* Ensures the image scales properly without distortion */
 }
 
