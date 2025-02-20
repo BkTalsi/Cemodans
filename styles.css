@@ -18,6 +18,7 @@ url('https://raw.githubusercontent.com/xxonara/Basket/main/bk%20talsi.jpg');
             background-size: cover;
             background-position: center;
             background-repeat: no-repeat;
+            height: 50px; }
     
 .diagonal-cell img {
     max-width: 100%; /* Allow image to take full width of cell */
@@ -40,6 +41,7 @@ url('https://raw.githubusercontent.com/xxonara/Basket/main/bk%20talsi.jpg');
     width: 15%; /* Ensures equal column width */
     white-space: nowrap; /* Prevents text wrapping */
     font-size: 14px; /* Adjust text size for better fit */
+    min-height: 50px;
     height: auto; /* Reduce row height */
 }
 
@@ -48,7 +50,8 @@ url('https://raw.githubusercontent.com/xxonara/Basket/main/bk%20talsi.jpg');
     .table th, .table td {
         font-size: 12px; /* Smaller text for smaller screens */
         padding: 3px;
-        height: 25px;
+        min-height: 25px;
+        min-width: 100px;
     }
 }
 
