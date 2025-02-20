@@ -49,11 +49,11 @@
 .custom-navbar {
     background-color: #027669 !important; /* Teal */
     color: white !important;
-    padding-top: 20px; /* Adjust the space above the navbar */
+    padding-top: 5px; /* Adjust the space above the navbar */
 }
 
 .navbar-nav .nav-item {
-    margin-top: 10px; /* Add space between navigation items */
+    margin-top: 20px; /* Add space between navigation items */
 }
 
 .custom-navbar .navbar-brand,
