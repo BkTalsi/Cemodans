@@ -10,11 +10,11 @@
 }
 
 .diagonal-cell img {
-    max-width: 90%; /* Prevents the image from overflowing */
-    max-height: 90%; /* Keeps it within the cell */
-    width: auto; /* Maintains aspect ratio */
-    height: auto; /* Maintains aspect ratio */
-    object-fit: contain; /* Ensures the image scales properly */
+    max-width: 100%; /* Allow image to take full width of cell */
+    max-height: 100%; /* Allow image to take full height of cell */
+    width: auto; /* Maintain aspect ratio */
+    height: auto; /* Maintain aspect ratio */
+    object-fit: contain; /* Ensures the image scales properly without distortion */
 }
 
 /* ----- Tables - Make All Columns Equal Width ----- */
