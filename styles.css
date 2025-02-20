@@ -41,23 +41,25 @@
 
 
 
-/* Fix Navbar & Footer Background Color */
 .custom-navbar, .custom-footer {
-    background-color: #027669 !important; /* Ensures correct color */
+    background-color: #027669 !important; /* Teal */
+    color: white !important;
 }
 
-/* Fix Navbar Text Color */
 .custom-navbar .navbar-brand,
 .custom-navbar .nav-link {
     color: white !important;
-    opacity: 0.9;
+    opacity: 1 !important; /* Removes transparency */
 }
 
-/* Fix Footer Text Color */
+.custom-navbar .nav-link:hover {
+    color: #f8f9fa !important; /* Lighten on hover */
+}
+
 .custom-footer {
-    color: white !important;
     text-align: center;
-    padding: 10px;
+    padding: 15px;
+    margin-top: 20px;
 }
 
 
