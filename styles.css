@@ -7,6 +7,11 @@
     padding: 0; /* Remove extra space */
     border: none;
 }
+.table td img {
+    width: 100%;         /* Scale image to fit the width of the td */
+    height: auto;        /* Maintain the aspect ratio of the image */
+    object-fit: contain; /* Ensure the image fits without stretching */
+}
 
 .diagonal-cell img {
     max-width: 100%; /* Allow image to take full width of cell */
