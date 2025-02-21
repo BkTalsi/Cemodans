@@ -26,6 +26,10 @@ url('https://raw.githubusercontent.com/xxonara/Basket/main/bk%20talsi.jpg');
     object-fit: contain; /* Ensures the image scales properly without distortion */
 }
 
+table .custom-header {
+    background-color: #027669 !important;
+    color: white !important;
+}
 /* ----- Tables - Make All Columns Equal Width ----- */
 .table {
     width: 100%;
