@@ -119,7 +119,7 @@ url('https://raw.githubusercontent.com/xxonara/Basket/main/bk%20talsi.jpg');
         }
         .map-box {
             width: 45%;
-            height: 45%;
+            height: 250px;
             position: relative;
         }
         .map {
