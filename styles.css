@@ -62,6 +62,10 @@ table .custom-header {
     color: white !important;
 }
 
+table .custom-header {
+    background-color: #027669 !important;
+    color: white !important;
+}
 
 /* ----- Responsive Adjustments ----- */
 @media (max-width: 768px) {
