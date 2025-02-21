@@ -17,7 +17,7 @@ jobs:
         run: echo "MAPS_API_KEY=${{ secrets.GOOGLE_MAPS_API_KEY }}" > .env
 
       - name: Replace API Key in HTML
-        run: sed -i "s/YOUR_API_KEY_HERE/${{ secrets.GOOGLE_MAPS_API_KEY }}/g" public/index.html
+        run: sed -i "s/YOUR_API_KEY_HERE/${{ secrets.GOOGLE_MAPS_API_KEY }}/g" public/Maps.html
 
       - name: Deploy to GitHub Pages
         uses: JamesIves/github-pages-deploy-action@v4
