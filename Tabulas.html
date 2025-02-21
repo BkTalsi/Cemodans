@@ -32,6 +32,7 @@
                 const resultsDamas = {};
                 const teamPointsKungi = {}; // For Kungi
                 const teamPointsDamas = {}; // For Dāmas
+                const vietaValues = rows.map(row => row.c[25]?.v || "");
                 const vietaValuesKungi = vietaValues.slice(0, 4); // First 4 rows for Kungi
                 const vietaValuesDamas = vietaValues.slice(4, 8); // Last 4 rows for Damas
 
