@@ -47,10 +47,14 @@
                     const gender2 = row.c[18]?.v; // T column
                     const teamName  = row.c[19]?.v; // U column
                     const columnZ = row.c[24]?.v; // Z column (used for "Vieta")
+
+                    console.log(`Checking row: Gender: ${gender2}, Team: ${teamName}, Vieta: ${columnZ}`);  // Debugging line
+
+    
                     if (gender2 === 'K' && teamsKungi.includes(teamName)) {
-                        resultsKungi[`${teamName}`] = { Vieta: columnZ };
+                        resultsKungi[teamName] = { Vieta: columnZ };
                     } else if (gender2 === 'D' && teamsDamas.includes(teamName)) {
-                        resultsDamas[`${teamName}`] = { Vieta: columnZ };
+                        resultsDamas[teamName] = { Vieta: columnZ };
                     }
                     
                     if (row.c[11] !== null && row.c[11] !== undefined) {
@@ -128,8 +132,8 @@
                         });
                         tableHTML += `<td><strong>${teamPoints[rowTeam]}</strong></td>`;
 
-                        const teamVieta = results[`${rowTeam}`]?.Vieta || '';
-                        console.log(teamVieta);  // Add this to check if the value is correctly retrieved
+                        const teamVieta = resultsKungi[`${rowTeam}`]?.Vieta || resultsDamas[`${rowTeam}`]?.Vieta || '';  // Make sure to check both Kungi and Damas results
+                        console.log(`Row team: ${rowTeam}, Vieta: ${teamVieta}`);  // Debugging line
                         tableHTML += `<td>${teamVieta}</td>`; 
                         // tableHTML += `<td>${results[`${rowTeam}-${teams[0]}`]?.Vieta || ''}</td>`;
                         tableHTML += `</tr>`;
