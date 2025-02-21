@@ -38,9 +38,18 @@
                 freeThrowRows.forEach(row => row[3] = parseFloat(row[3]) || 0);
         
                 // Sort primarily by score (descending)
-                threePointRows.sort((a, b) => a[3] - b[3]);
-                freeThrowRows.sort((a, b) => a[3] - b[3]);
+               threePointRows.sort((a, b) => {
+                    if (a[3] === 0) return 1; // Move `a` to the end if its 4th column is 0
+                    if (b[3] === 0) return -1; // Move `b` to the end if its 4th column is 0
+                    return a[3] - b[3]; // Otherwise, sort in ascending order
+                });
                 
+                freeThrowRows.sort((a, b) => {
+                    if (a[3] === 0) return 1; // Move `a` to the end if its 4th column is 0
+                    if (b[3] === 0) return -1; // Move `b` to the end if its 4th column is 0
+                    return a[3] - b[3]; // Otherwise, sort in ascending order
+                });
+                                
                 // Generate tables
                 const createTable = (headers, rows) => {
                     let table = `<table class="table table-striped table-bordered">
