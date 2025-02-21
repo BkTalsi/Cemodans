@@ -38,8 +38,8 @@
                 freeThrowRows.forEach(row => row[3] = parseFloat(row[3]) || 0);
         
                 // Sort primarily by score (descending)
-                threePointRows.sort((a, b) => b[3] - a[3]);
-                freeThrowRows.sort((a, b) => b[3] - a[3]);
+                threePointRows.sort((a, b) => a[3] - b[3]);
+                freeThrowRows.sort((a, b) => a[3] - b[3]);
                 
                 // Generate tables
                 const createTable = (headers, rows) => {
