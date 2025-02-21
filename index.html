@@ -82,8 +82,8 @@
                     const type = row[1]; // Second column value
                     let bgColor = ""; 
                 
-                    if (type === "K") bgColor = 'background-color: #cce5ff;'; // Light Blue
-                    else if (type === "D") bgColor = 'background-color: #f8d7da;'; // Light Red
+                    if (type === "K") bgColor = 'background-color: #cce5ff !important;'; // Light Blue
+                    else if (type === "D") bgColor = 'background-color: #f8d7da !important;'; // Light Red
                 
                     table += `<tr style="${bgColor}">`;
                     //row.forEach(cell => table += `<td>${cell}</td>`);
