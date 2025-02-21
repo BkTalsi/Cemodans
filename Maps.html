@@ -4,57 +4,47 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="styles.css">
-    <title>Google Maps Address Display</title>
-    <style>
-        /* Make the map container take up full height and width */
-        #map {
-            height: 100vh;  /* Use viewport height */
-            width: 100%;    /* Full width */
-        }
-        body {
-            margin: 0;
-            padding: 0;
-        }
-    </style>
+    <title>Čemodāna kauss Talsos - Vietas</title>
 </head>
 <body>
-    <h1>Google Maps - Address Display</h1>
+    <h1>Čemodāna kauss Talsos - Vietas</h1>
     <div id="map"></div>
 
-    <script>
+     <script>
         function initMap() {
-            // Set the address you want to show on the map
-            var address = '1600 Amphitheatre Parkway, Mountain View, CA';
+            const locations = [
+                { name: "Talsu Sporta Halle", address: "Kareivju iela 12, Talsi, Latvia", elementId: "map1" },
+                { name: "Jūrmalas Sporta Centrs", address: "Rīgas iela 55, Jūrmala, Latvia", elementId: "map2" },
+                { name: "Siguldas Sporta Halle", address: "Ata Kronvalda iela 7A, Sigulda, Latvia", elementId: "map3" },
+                { name: "Salacgrīvas Sporta Centrs", address: "Sila iela 2, Salacgrīva, Latvia", elementId: "map4" }
+            ];
 
-            // Create a geocoder object to convert address to latitude/longitude
-            var geocoder = new google.maps.Geocoder();
+            const geocoder = new google.maps.Geocoder();
 
-            // Create a map and set an initial zoom level and center
-            var map = new google.maps.Map(document.getElementById("map"), {
-                zoom: 14,
-                center: { lat: 37.7749, lng: -122.4194 }, // Default center (San Francisco)
-            });
+            locations.forEach(location => {
+                geocoder.geocode({ address: location.address }, (results, status) => {
+                    if (status === "OK") {
+                        const map = new google.maps.Map(document.getElementById(location.elementId), {
+                            zoom: 14,
+                            center: results[0].geometry.location
+                        });
 
-            // Use the geocoder to get the location from the address
-            geocoder.geocode({ 'address': address }, function (results, status) {
-                if (status === 'OK') {
-                    // If the geocode is successful, move the map to the new location
-                    map.setCenter(results[0].geometry.location);
-                    var marker = new google.maps.Marker({
-                        map: map,
-                        position: results[0].geometry.location,
-                    });
-                } else {
-                    // If geocode fails, alert the user
-                    alert("Geocode was not successful for the following reason: " + status);
-                }
+                        new google.maps.Marker({
+                            map: map,
+                            position: results[0].geometry.location
+                        });
+
+                        // Update the directions link
+                        const directionsLink = document.getElementById(location.elementId + "-link");
+                        directionsLink.href = `https://www.google.com/maps/dir/?api=1&destination=${encodeURIComponent(location.address)}`;
+                    } else {
+                        console.error("Geocode was not successful for: " + location.address);
+                    }
+                });
             });
         }
     </script>
-
-    <!-- Google Maps API Key (replace 'YOUR_API_KEY' with your actual key) -->
-    <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyByPI64vtBBvkMw7v0CQdM3sNspi4T8xLE&callback=initMap" async defer></script>
-    
+</head>   
     <nav class="navbar navbar-expand-lg navbar-dark custom-navbar">
     <div class="container">
         <img src="https://raw.githubusercontent.com/xxonara/Basket/main/talsu%20novads2.jpg" alt="Logo" class="navbar-logo" style="height: 40px; margin-right: 10px;">
@@ -74,10 +64,43 @@
     </div>
     </nav>
 
-    <div class="container mt-5">
-        <h2 class="text-center">📊 Čemodāna kauss Talsos</h2>
-        <h3 class="text-center">2025</h3>
-        <div id="table-container" class="mt-4"></div>
+<div class="container mt-5">
+        <h2 class="text-center">📍 Spēļu Norises Vietas</h2>
+
+        <h3 class="text-center mt-4">Talsi & Jūrmala</h3>
+        <div class="map-container">
+            <div class="map-box">
+                <div class="map-header">Talsu Sporta Halle</div>
+                <div id="map1" class="map"></div>
+                <a id="map1-link" class="directions-link" target="_blank">➡️ Get Directions</a>
+            </div>
+            <div class="map-box">
+                <div class="map-header">Jūrmalas Sporta Centrs</div>
+                <div id="map2" class="map"></div>
+                <a id="map2-link" class="directions-link" target="_blank">➡️ Get Directions</a>
+            </div>
+        </div>
+
+        <h3 class="text-center mt-4">Sigulda & Salacgrīva</h3>
+        <div class="map-container">
+            <div class="map-box">
+                <div class="map-header">Siguldas Sporta Halle</div>
+                <div id="map3" class="map"></div>
+                <a id="map3-link" class="directions-link" target="_blank">➡️ Get Directions</a>
+            </div>
+            <div class="map-box">
+                <div class="map-header">Salacgrīvas Sporta Centrs</div>
+                <div id="map4" class="map"></div>
+                <a id="map4-link" class="directions-link" target="_blank">➡️ Get Directions</a>
+            </div>
+        </div>
     </div>
+
+    <footer class="custom-footer">
+        <p>© 2025 Čemodāna kauss Talsos. All Rights Reserved.</p>
+    </footer>
+
+    <!-- Google Maps API Key (replace 'YOUR_API_KEY' with your actual key) -->
+    <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyByPI64vtBBvkMw7v0CQdM3sNspi4T8xLE&callback=initMap" async defer></script>
 </body>
 </html>
