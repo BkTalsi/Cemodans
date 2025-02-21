@@ -24,7 +24,7 @@
                 if (!jsonText) return;
 
                 const data = JSON.parse(jsonText);
-                const headers = data.table.cols.filter((_, index) => index !== 7).map(col => col.label || "");
+                const headers = data.table.cols.filter((_, index) => index !== 5).map(col => col.label || "");
                 
                 function formatCell(cell, rowIndex, colIndex) {
                     if (!cell || cell.v === undefined) return ""; // Empty cell
