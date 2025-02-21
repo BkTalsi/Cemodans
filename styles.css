@@ -88,7 +88,7 @@ url('https://raw.githubusercontent.com/xxonara/Basket/main/bk%20talsi.jpg');
 }
 
 .custom-navbar .navbar-nav .nav-item .nav-link {
-    color: lightblue !important; /* Color for all nav links */
+    color: black !important; /* Color for all nav links */
 }
 .custom-navbar .navbar-nav .nav-item .nav-link:hover {
     color: #f8f9fa !important; /* Hover state color */
