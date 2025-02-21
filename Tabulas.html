@@ -8,6 +8,7 @@
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css">
     <link rel="stylesheet" href="styles.css">
     <!-- Bootstrap JS (this is REQUIRED for toggling navbar) -->
+    <link rel="icon" href="data:,">
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
     <script>
         const sheetID = "1TpX7oRId-a7WD1PFH7aJoR9y6ConYYIWwWOYwMOmO-k";
@@ -43,9 +44,9 @@
                     let scoreB = row.c[6]?.v;
                     let zeroIndic;
 
-                    const columnT = row.c[19]?.v; // T column
-                    const columnU = row.c[20]?.v; // U column
-                    const columnZ = row.c[25]?.v; // Z column (used for "Vieta")
+                    const columnT = row.c[18]?.v; // T column
+                    const columnU = row.c[19]?.v; // U column
+                    const columnZ = row.c[24]?.v; // Z column (used for "Vieta")
                     
                     if (row.c[11] !== null && row.c[11] !== undefined) {
                         zeroIndic = String(row.c[11]?.v).trim();
@@ -122,7 +123,9 @@
                             }
                         });
                         tableHTML += `<td><strong>${teamPoints[rowTeam]}</strong></td>`;
-                        tableHTML += `<td>${results[`${rowTeam}-${teams[0]}`]?.Vieta || ''}</td>`;
+                        const vietaValue = row.c[24]?.v || '';  // Make sure to capture the value from column Z (24)
+                        tableHTML += `<td>${vietaValue}</td>`; 
+                        // tableHTML += `<td>${results[`${rowTeam}-${teams[0]}`]?.Vieta || ''}</td>`;
                         tableHTML += `</tr>`;
                     });
 
