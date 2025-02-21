@@ -47,6 +47,11 @@
                     const columnT = row.c[18]?.v; // T column
                     const columnU = row.c[19]?.v; // U column
                     const columnZ = row.c[24]?.v; // Z column (used for "Vieta")
+                    if (gender === 'K' && teamsKungi.includes(teamName)) {
+                        resultsKungi[`${teamName}`] = { Vieta: columnZ };
+                    } else if (gender === 'D' && teamsDamas.includes(teamName)) {
+                        resultsDamas[`${teamName}`] = { Vieta: columnZ };
+                    }
                     
                     if (row.c[11] !== null && row.c[11] !== undefined) {
                         zeroIndic = String(row.c[11]?.v).trim();
@@ -125,9 +130,9 @@
                         });
                         tableHTML += `<td><strong>${teamPoints[rowTeam]}</strong></td>`;
 
-                        const vietaValue = results[`${rowTeam}-${teams[0]}`]?.Vieta || '';  // Make sure to capture the value from column Z (24)
+                        const teamVieta = results[`${rowTeam}`]?.Vieta || '';
                         console.log(results[`${rowTeam}-${teams[0]}`]?.Vieta);  // Add this to check if the value is correctly retrieved
-                        tableHTML += `<td>${vietaValue}</td>`; 
+                        tableHTML += `<td>${teamVieta}</td>`; 
                         // tableHTML += `<td>${results[`${rowTeam}-${teams[0]}`]?.Vieta || ''}</td>`;
                         tableHTML += `</tr>`;
                     });
