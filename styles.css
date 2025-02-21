@@ -125,7 +125,7 @@ body {
             margin: auto;
         }
         .map-box {
-            width: 100%;
+            width: 45%;
             height: 400px;
             position: relative;
             border-radius: 10px;
