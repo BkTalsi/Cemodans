@@ -44,12 +44,12 @@
                     let scoreB = row.c[6]?.v;
                     let zeroIndic;
 
-                    const gender = row.c[18]?.v; // T column
+                    const gender2 = row.c[18]?.v; // T column
                     const teamName  = row.c[19]?.v; // U column
                     const columnZ = row.c[24]?.v; // Z column (used for "Vieta")
-                    if (gender === 'K' && teamsKungi.includes(teamName)) {
+                    if (gender2 === 'K' && teamsKungi.includes(teamName)) {
                         resultsKungi[`${teamName}`] = { Vieta: columnZ };
-                    } else if (gender === 'D' && teamsDamas.includes(teamName)) {
+                    } else if (gender2 === 'D' && teamsDamas.includes(teamName)) {
                         resultsDamas[`${teamName}`] = { Vieta: columnZ };
                     }
                     
