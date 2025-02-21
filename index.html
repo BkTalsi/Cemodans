@@ -23,7 +23,6 @@
                 if (!jsonText) return;
 
                 const data = JSON.parse(jsonText);
-                console.log(data.table.rows);
                 const headers = data.table.cols.filter((_, index) => index !== 7).map(col => col.label || "");
                 
                 function formatCell(cell, rowIndex, colIndex) {
@@ -36,9 +35,7 @@
                     }
                     // Check if the cell contains a URL in column K (or other designated column)
                     if (rowIndex >= 0 && colIndex === 5) {  // Apply only to column I (index 5)
-                        const urlCell = data.table.rows[rowIndex]?.c[7]; // Correct index for column M
-                        console.log(`Row ${rowIndex}, Column I:`, cell.v);  
-                        console.log(`Row ${rowIndex}, URL column:`, urlCell?.v);  
+                        const urlCell = data.table.rows[rowIndex]?.c[7]; // Correct index for column M 
                         if (urlCell && urlCell.v) {
                             return `<a href="${urlCell.v}" target="_blank">${cell.v}</a>`;
                         }
