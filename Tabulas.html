@@ -24,6 +24,7 @@
                 const text = await response.text();
                 const jsonText = text.match(/\{.*\}/s)?.[0];
                 if (!jsonText) return;
+                
 
                 const data = JSON.parse(jsonText);
                 const rows = data.table.rows;
@@ -31,6 +32,7 @@
                 const resultsDamas = {};
                 const teamPointsKungi = {}; // For Kungi
                 const teamPointsDamas = {}; // For Dāmas
+                const teamGenders = {};  // Add this line to declare teamGenders
 
                 // Initialize team points for both tables
                 teamsKungi.forEach(team => teamPointsKungi[team] = 0);
