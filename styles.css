@@ -49,6 +49,12 @@ url('https://raw.githubusercontent.com/xxonara/Basket/main/bk%20talsi.jpg');
     overflow-wrap: break-word; /* Ensures text breaks within the cell */
 }
 
+.custom-header {
+    background-color: #027669 !important;
+    color: white !important;
+}
+
+
 /* ----- Responsive Adjustments ----- */
 @media (max-width: 768px) {
     .table th, .table td {
