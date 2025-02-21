@@ -123,7 +123,9 @@
                             }
                         });
                         tableHTML += `<td><strong>${teamPoints[rowTeam]}</strong></td>`;
-                        const vietaValue = row.c[24]?.v || '';  // Make sure to capture the value from column Z (24)
+
+                        const vietaValue = results[`${rowTeam}-${teams[0]}`]?.Vieta || '';  // Make sure to capture the value from column Z (24)
+                        console.log(results[`${rowTeam}-${teams[0]}`]?.Vieta);  // Add this to check if the value is correctly retrieved
                         tableHTML += `<td>${vietaValue}</td>`; 
                         // tableHTML += `<td>${results[`${rowTeam}-${teams[0]}`]?.Vieta || ''}</td>`;
                         tableHTML += `</tr>`;
