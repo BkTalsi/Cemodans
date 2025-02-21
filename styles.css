@@ -111,36 +111,50 @@ url('https://raw.githubusercontent.com/xxonara/Basket/main/bk%20talsi.jpg');
     font-weight: bold;
 }
 
-
+body {
+    font-family: Arial, sans-serif;
+    padding-bottom: 80px; /* Prevent footer overlap */
+}
 .map-container {
             display: flex;
             flex-wrap: wrap;
             justify-content: center;
+            grid-template-columns: repeat(2, 1fr);
             gap: 20px;
-            margin: 20px;
+            max-width: 900px; /* Keeps maps from being too wide */
+            margin: auto;
         }
         .map-box {
             width: 25%;
             height: 200px;
             position: relative;
+            border-radius: 10px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+            text-align: center;
+            padding: 15px;
         }
         .map {
             width: 100%;
             height: 100%;
+            height: 250px; /* Smaller maps */
+            border-radius: 8px;
         }
         .map-header {
+            font-size: 18px;
             text-align: center;
             font-weight: bold;
-            margin-bottom: 5px;
+            margin-bottom: 10px;
         }
         .directions-link {
             display: block;
-            text-align: center;
-            margin-top: 5px;
-            font-size: 14px;
+            margin-top: 10px;
+            font-size: 16px;
+            color: #007bff;
+            text-decoration: none;
         }
         @media (max-width: 768px) {
             .map-box {
                 width: 100%;
+                grid-template-columns: 1fr; /* 1 column on small screens */
             }
         }
