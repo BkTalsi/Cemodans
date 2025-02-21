@@ -76,13 +76,13 @@
                             }
 
                             if (gender === "K" && teamsKungi.includes(teamA) && teamsKungi.includes(teamB)) {
-                                resultsKungi[`${teamA}-${teamB}`] = { result: `${scoreA}:${scoreB}`, points: pointsA };
-                                resultsKungi[`${teamB}-${teamA}`] = { result: `${scoreB}:${scoreA}`, points: pointsB };
+                                resultsKungi[`${teamA}-${teamB}`] = { result: `${scoreA}:${scoreB}`, points: pointsA, Vieta: columnZ  };
+                                resultsKungi[`${teamB}-${teamA}`] = { result: `${scoreB}:${scoreA}`, points: pointsB, Vieta: columnZ  };
                                 teamPointsKungi[teamA] += pointsA;
                                 teamPointsKungi[teamB] += pointsB;
                             } else if (gender === "D" && teamsDamas.includes(teamA) && teamsDamas.includes(teamB)) {
-                                resultsDamas[`${teamA}-${teamB}`] = { result: `${scoreA}:${scoreB}`, points: pointsA };
-                                resultsDamas[`${teamB}-${teamA}`] = { result: `${scoreB}:${scoreA}`, points: pointsB };
+                                resultsDamas[`${teamA}-${teamB}`] = { result: `${scoreA}:${scoreB}`, points: pointsA, Vieta: columnZ  };
+                                resultsDamas[`${teamB}-${teamA}`] = { result: `${scoreB}:${scoreA}`, points: pointsB, Vieta: columnZ  };
                                 teamPointsDamas[teamA] += pointsA;
                                 teamPointsDamas[teamB] += pointsB;
                             }
