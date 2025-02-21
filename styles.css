@@ -25,6 +25,10 @@ url('https://raw.githubusercontent.com/xxonara/Basket/main/bk%20talsi.jpg');
     max-height: 100%; /* Allow image to take full height of cell */
     object-fit: contain; /* Ensures the image scales properly without distortion */
 }
+.custom-header {
+    background-color: #027669 !important;
+    color: white !important;
+}
 
 table .custom-header {
     background-color: #027669 !important;
