@@ -29,6 +29,10 @@ url('https://raw.githubusercontent.com/xxonara/Basket/main/bk%20talsi.jpg');
     background-color: #027669 !important;
     color: white !important;
 }
+thead {
+    background-color: #027669;
+    color: white;
+}
 
 table thead .custom-header {
     background-color: #027669 !important;
