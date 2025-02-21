@@ -132,7 +132,10 @@
                         });
                         tableHTML += `<td><strong>${teamPoints[rowTeam]}</strong></td>`;
 
-                        const teamVieta = resultsKungi[`${rowTeam}`]?.Vieta || resultsDamas[`${rowTeam}`]?.Vieta || '';  // Make sure to check both Kungi and Damas results
+                        // const teamVieta = resultsKungi[`${rowTeam}`]?.Vieta || resultsDamas[`${rowTeam}`]?.Vieta || '';  // Make sure to check both Kungi and Damas results
+                        const teamVieta = gender === 'K' 
+                            ? resultsKungi[`${rowTeam}`]?.Vieta || '' 
+                            : resultsDamas[`${rowTeam}`]?.Vieta || '';  
                         console.log(`Row team: ${rowTeam}, Vieta: ${teamVieta}`);  // Debugging line
                         tableHTML += `<td>${teamVieta}</td>`; 
                         // tableHTML += `<td>${results[`${rowTeam}-${teams[0]}`]?.Vieta || ''}</td>`;
