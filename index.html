@@ -88,10 +88,10 @@
                 
                     if (type === "K") bgColor = 'background-color: #cce5ff !important;'; // Light Blue
                     else if (type === "D") bgColor = 'background-color: #f8d7da !important;'; // Light Red
-                
+                console.log("Background Color: ", bgColor);  // Debugging log
                     table += `<tr style="${bgColor}">`;
                     //row.forEach(cell => table += `<td>${cell}</td>`);
-                    row.forEach(cell => table += `<td>${cell instanceof String ? cell : cell.toString()}</td>`);
+                    row.forEach(cell => table += `<td style="${bgColor}">${cell instanceof String ? cell : cell.toString()}</td>`);
                     table += "</tr>";
                 });
 
