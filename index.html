@@ -79,7 +79,13 @@
                 table += `</tr></thead><tbody>`;
 
                 rows.forEach(row => {
-                    table += "<tr>";
+                    const type = row[1]; // Second column value
+                    let bgColor = ""; 
+                
+                    if (type === "K") bgColor = 'background-color: #cce5ff;'; // Light Blue
+                    else if (type === "D") bgColor = 'background-color: #f8d7da;'; // Light Red
+                
+                    table += `<tr style="${bgColor}">`;
                     //row.forEach(cell => table += `<td>${cell}</td>`);
                     row.forEach(cell => table += `<td>${cell instanceof String ? cell : cell.toString()}</td>`);
                     table += "</tr>";
