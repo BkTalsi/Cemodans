@@ -32,7 +32,8 @@
                 const resultsDamas = {};
                 const teamPointsKungi = {}; // For Kungi
                 const teamPointsDamas = {}; // For Dāmas
-                const vietaValues = rows.map(row => row.c[25]?.v || ""); // Extract Vieta values from column c[25]
+                const vietaValuesKungi = vietaValues.slice(0, 4); // First 4 rows for Kungi
+                const vietaValuesDamas = vietaValues.slice(4, 8); // Last 4 rows for Damas
 
                 teamsKungi.forEach((team, index) => {
                     resultsKungi[team] = { Vieta: vietaValues[index] };
@@ -100,7 +101,7 @@
                     }
                 });
                 // Helper function to generate table
-                function generateTable(teams, results, teamPoints) {
+                function generateTable(teams, results, teamPoints, vietaValues) {
                     let tableHTML = `<table class="table table-bordered text-center">
                                         <thead>
                                             <tr>
@@ -145,8 +146,8 @@
                 }
 
                 // Generate the two tables
-                const tableHTMLKungi = generateTable(teamsKungi, resultsKungi, teamPointsKungi);
-                const tableHTMLDamas = generateTable(teamsDamas, resultsDamas, teamPointsDamas);
+                const tableHTMLKungi = generateTable(teamsKungi, resultsKungi, teamPointsKungi, vietaValuesKungi);
+                const tableHTMLDamas = generateTable(teamsDamas, resultsDamas, teamPointsDamas, vietaValuesDamas);
 
                 // Display the tables
                 document.getElementById("kungi-table").innerHTML = tableHTMLKungi;
