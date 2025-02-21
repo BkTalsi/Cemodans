@@ -131,7 +131,7 @@
                         tableHTML += `<td><strong>${teamPoints[rowTeam]}</strong></td>`;
 
                         const teamVieta = results[`${rowTeam}`]?.Vieta || '';
-                        console.log(results[`${rowTeam}-${teams[0]}`]?.Vieta);  // Add this to check if the value is correctly retrieved
+                        console.log(teamVieta);  // Add this to check if the value is correctly retrieved
                         tableHTML += `<td>${teamVieta}</td>`; 
                         // tableHTML += `<td>${results[`${rowTeam}-${teams[0]}`]?.Vieta || ''}</td>`;
                         tableHTML += `</tr>`;
