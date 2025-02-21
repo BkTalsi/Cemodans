@@ -29,19 +29,15 @@ url('https://raw.githubusercontent.com/xxonara/Basket/main/bk%20talsi.jpg');
     background-color: #027669 !important;
     color: white !important;
 }
-thead {
-    background-color: #027669;
-    color: white;
-}
 
-table thead .custom-header {
+.table thead .custom-header {
     background-color: #027669 !important;
     color: white !important;
 }
 
-thead th {
-    background-color: #027669;
-    color: white;
+.thead thead tr th {
+    background-color: #027669 !important;
+    color: white !important;
 }
 /* ----- Tables - Make All Columns Equal Width ----- */
 .table {
@@ -66,15 +62,6 @@ thead th {
     overflow-wrap: break-word; /* Ensures text breaks within the cell */
 }
 
-.custom-header {
-    background-color: #027669 !important;
-    color: white !important;
-}
-
-table .custom-header {
-    background-color: #027669 !important;
-    color: white !important;
-}
 
 /* ----- Responsive Adjustments ----- */
 @media (max-width: 768px) {
