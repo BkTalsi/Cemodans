@@ -82,6 +82,8 @@
 
                 rows.forEach(row => {
                     const type = row[1]; // Second column value
+                    console.log("Row data:", row);
+                    console.log("Type value:", type);  // Log the cleaned-up type value
                     let bgColor = ""; 
                 
                     if (type === "K") bgColor = 'background-color: #cce5ff !important;'; // Light Blue
