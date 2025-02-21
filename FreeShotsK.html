@@ -16,7 +16,7 @@
     <script>
         const sheetID = "1TpX7oRId-a7WD1PFH7aJoR9y6ConYYIWwWOYwMOmO-k";
         const gid = "1378510021";
-        const query = encodeURIComponent("select A,B,C,M,N,O");
+        const query = encodeURIComponent("select A,B,C,D,M,N,O,P");
         const apiURL = `https://docs.google.com/spreadsheets/d/${sheetID}/gviz/tq?tqx=out:json&gid=${gid}&tq=${query}`;
 
         async function fetchData() {
@@ -32,7 +32,15 @@
                 // Separate rows into two tables
                 const threePointRows = rows.map(row => row.c.slice(0, 3).map(cell => cell?.v || ""));
                 const freeThrowRows = rows.map(row => row.c.slice(3, 6).map(cell => cell?.v || ""));
-
+        
+                // Convert score columns to numbers for sorting
+                threePointRows.forEach(row => row[3] = parseFloat(row[3]) || 0);
+                freeThrowRows.forEach(row => row[3] = parseFloat(row[3]) || 0);
+        
+                // Sort primarily by score (descending)
+                threePointRows.sort((a, b) => b[3] - a[3]);
+                freeThrowRows.sort((a, b) => b[3] - a[3]);
+                
                 // Generate tables
                 const createTable = (headers, rows) => {
                     let table = `<table class="table table-striped table-bordered">
