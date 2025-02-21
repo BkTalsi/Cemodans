@@ -80,8 +80,7 @@ url('https://raw.githubusercontent.com/xxonara/Basket/main/bk%20talsi.jpg');
     padding-top: 1px !important;
 }
 
-.custom-navbar .navbar-brand,
-.custom-navbar .nav-link {
+.custom-navbar .navbar-brand{
     color: white !important;
     opacity: 1 !important; /* Ensure full opacity */
     margin-right: 30px !important;
@@ -93,7 +92,3 @@ url('https://raw.githubusercontent.com/xxonara/Basket/main/bk%20talsi.jpg');
 .custom-navbar .navbar-nav .nav-item .nav-link:hover {
     color: #f8f9fa !important; /* Hover state color */
 }
-.custom-navbar .navbar-nav .nav-item .nav-link {
-    color: white !important; /* Override Bootstrap styles */
-}
-
