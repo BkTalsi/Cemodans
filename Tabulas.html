@@ -37,7 +37,7 @@
                 // Initialize team points for both tables
                 teamsKungi.forEach(team => teamPointsKungi[team] = 0);
                 teamsDamas.forEach(team => teamPointsDamas[team] = 0);
-
+                const teamGenders = []; 
                 rows.forEach(row => {
                     const teamA = row.c[4]?.v;
                     const teamB = row.c[7]?.v;
