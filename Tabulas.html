@@ -43,8 +43,8 @@
                 });
                 
                 // Debugging output
-                console.log("Results Kungi:", resultsKungi);
-                console.log("Results Damas:", resultsDamas);
+                // console.log("Results Kungi:", resultsKungi);
+                // console.log("Results Damas:", resultsDamas);
                 
                 // Initialize team points for both tables
                 teamsKungi.forEach(team => teamPointsKungi[team] = 0);
@@ -112,6 +112,8 @@
                                         <tbody>`;
 
                     teams.forEach((rowTeam, rowIndex) => {
+                        const teamVieta = vietaValues[rowIndex] || ""; // Get the `Vieta` value by row order
+                        console.log(`Row ${rowIndex + 1}: Vieta = ${teamVieta}`); // Debugging output
                         tableHTML += `<tr><th>${rowTeam}</th>`;
                         teams.forEach((colTeam, colIndex) => {
                             if (rowIndex === colIndex) {
@@ -132,8 +134,8 @@
                             }
                         });
                         tableHTML += `<td><strong>${teamPoints[rowTeam]}</strong></td>`;
-                        const teamVieta = resultsKungi[rowTeam]?.Vieta || resultsDamas[rowTeam]?.Vieta || "";
-                        console.log(`Row team: ${rowTeam}, Vieta: ${teamVieta}`);
+                        // const teamVieta = resultsKungi[rowTeam]?.Vieta || resultsDamas[rowTeam]?.Vieta || "";
+                        // console.log(`Row team: ${rowTeam}, Vieta: ${teamVieta}`);
                         tableHTML += `<td>${teamVieta}</td>`;
                         tableHTML += `</tr>`;
                     });
