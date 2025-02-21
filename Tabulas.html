@@ -149,7 +149,9 @@
                     tableHTML += `</tbody></table>`;
                     return tableHTML;
                 }
-
+console.log("Team Genders:", teamGenders);
+console.log("Results Kungi:", resultsKungi);
+console.log("Results Damas:", resultsDamas);
                 // Generate the two tables
                 const tableHTMLKungi = generateTable(teamsKungi, resultsKungi, teamPointsKungi);
                 const tableHTMLDamas = generateTable(teamsDamas, resultsDamas, teamPointsDamas);
