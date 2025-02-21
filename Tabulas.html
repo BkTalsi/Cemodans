@@ -53,12 +53,23 @@
                     console.log(`Checking row: Gender: ${gender2}, Team: ${teamName}, Vieta: ${columnZ}`);  // Debugging line
 
     
-                    if (gender2 === 'K' && teamsKungi.includes(teamName)) {
-                        teamGenders[teamName] = 'K';
-                        resultsKungi[teamName] = { Vieta: columnZ };
-                    } else if (gender2 === 'D' && teamsDamas.includes(teamName)) {
-                        teamGenders[teamName] = 'D';
-                        resultsDamas[teamName] = { Vieta: columnZ };
+                    // if (gender2 === 'K' && teamsKungi.includes(teamName)) {
+                    //     teamGenders[teamName] = 'K';
+                    //     resultsKungi[teamName] = { Vieta: columnZ };
+                    // } else if (gender2 === 'D' && teamsDamas.includes(teamName)) {
+                    //     teamGenders[teamName] = 'D';
+                    //     resultsDamas[teamName] = { Vieta: columnZ };
+                    // }
+                     if (gender2 === 'K' && teamsKungi.includes(teamName)) {
+                    // Add entry for this team in gender K
+                    teamGenders.push({ team: teamName, gender: 'K', Vieta: columnZ });
+                    resultsKungi[teamName] = { Vieta: columnZ }; // Storing Kugi results as needed
+                    }
+                    // For Damas teams (gender "D")
+                    else if (gender2 === 'D' && teamsDamas.includes(teamName)) {
+                        // Add entry for this team in gender D
+                        teamGenders.push({ team: teamName, gender: 'D', Vieta: columnZ });
+                        resultsDamas[teamName] = { Vieta: columnZ }; // Storing Damas results as needed
                     }
                     
                     if (row.c[11] !== null && row.c[11] !== undefined) {
@@ -89,13 +100,13 @@
                             }
 
                             if (gender === "K" && teamsKungi.includes(teamA) && teamsKungi.includes(teamB)) {
-                                resultsKungi[`${teamA}-${teamB}`] = { result: `${scoreA}:${scoreB}`, points: pointsA, Vieta: columnZ  };
-                                resultsKungi[`${teamB}-${teamA}`] = { result: `${scoreB}:${scoreA}`, points: pointsB, Vieta: columnZ  };
+                                resultsKungi[`${teamA}-${teamB}`] = { result: `${scoreA}:${scoreB}`, points: pointsA };
+                                resultsKungi[`${teamB}-${teamA}`] = { result: `${scoreB}:${scoreA}`, points: pointsB };
                                 teamPointsKungi[teamA] += pointsA;
                                 teamPointsKungi[teamB] += pointsB;
                             } else if (gender === "D" && teamsDamas.includes(teamA) && teamsDamas.includes(teamB)) {
-                                resultsDamas[`${teamA}-${teamB}`] = { result: `${scoreA}:${scoreB}`, points: pointsA, Vieta: columnZ  };
-                                resultsDamas[`${teamB}-${teamA}`] = { result: `${scoreB}:${scoreA}`, points: pointsB, Vieta: columnZ  };
+                                resultsDamas[`${teamA}-${teamB}`] = { result: `${scoreA}:${scoreB}`, points: pointsA  };
+                                resultsDamas[`${teamB}-${teamA}`] = { result: `${scoreB}:${scoreA}`, points: pointsB  };
                                 teamPointsDamas[teamA] += pointsA;
                                 teamPointsDamas[teamB] += pointsB;
                             }
