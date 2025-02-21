@@ -1,26 +1,27 @@
-name: Deploy Website with API Key
+name: Deploy Google Maps
 
 on:
   push:
     branches:
-      - main  # Runs when pushing to the main branch
+      - main
 
 jobs:
   deploy:
     runs-on: ubuntu-latest
-
     steps:
-      - name: Checkout Repository
-        uses: actions/checkout@v3  # Fetches your repo
+      - name: Checkout Code
+        uses: actions/checkout@v3
 
-      - name: Create .env File with API Key
-        run: echo "MAPS_API_KEY=${{ secrets.GOOGLE_MAPS_API_KEY }}" > .env
+      - name: Debug Secrets
+        run: echo "API Key is set: ${{ secrets.GOOGLE_MAPS_API_KEY }}"
 
-      - name: Replace API Key in HTML
-        run: sed -i "s/YOUR_API_KEY_HERE/${{ secrets.GOOGLE_MAPS_API_KEY }}/g" public/Maps.html
+      - name: Replace API key in HTML
+        run: sed -i 's/YOUR_API_KEY/${{ secrets.GOOGLE_MAPS_API_KEY }}/g' Maps.html
 
-      - name: Deploy to GitHub Pages
-        uses: JamesIves/github-pages-deploy-action@v4
-        with:
-          branch: gh-pages
-          folder: public
+      - name: Commit and Push Changes
+        run: |
+          git config --global user.name 'github-actions'
+          git config --global user.email 'github-actions@github.com'
+          git add Maps.html
+          git commit -m "Update API key in Maps.html"
+          git push
