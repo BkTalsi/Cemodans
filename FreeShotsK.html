@@ -30,8 +30,8 @@
                 const rows = data.table.rows;
 
                 // Separate rows into two tables
-                const threePointRows = rows.map(row => row.c.slice(0, 3).map(cell => cell?.v || ""));
-                const freeThrowRows = rows.map(row => row.c.slice(3, 6).map(cell => cell?.v || ""));
+                const threePointRows = rows.map(row => row.c.slice(0, 4).map(cell => cell?.v || ""));
+                const freeThrowRows = rows.map(row => row.c.slice(4, 8).map(cell => cell?.v || ""));
         
                 // Convert score columns to numbers for sorting
                 threePointRows.forEach(row => row[3] = parseFloat(row[3]) || 0);
@@ -58,8 +58,8 @@
                     return table;
                 };
 
-                document.getElementById("three-point-container").innerHTML = createTable(["Komanda", "Spēlētājs", "Rezultāts"], threePointRows);
-                document.getElementById("free-throw-container").innerHTML = createTable(["Komanda", "Spēlētājs", "Rezultāts"], freeThrowRows);
+                document.getElementById("three-point-container").innerHTML = createTable(["Komanda", "Spēlētājs", "Rezultāts", "#"], threePointRows);
+                document.getElementById("free-throw-container").innerHTML = createTable(["Komanda", "Spēlētājs", "Rezultāts", "#"], freeThrowRows);
 
             } catch (error) {
                 console.error("Error fetching data:", error);
