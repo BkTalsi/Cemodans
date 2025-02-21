@@ -15,7 +15,7 @@
 .image-cell {
             background-image:
 url('https://raw.githubusercontent.com/xxonara/Basket/main/bk%20talsi.jpg');
-            background-size: scale-down;
+            background-size: contain;
             background-position: center;
             background-repeat: no-repeat;
             height: 50px; }
