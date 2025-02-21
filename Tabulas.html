@@ -52,8 +52,10 @@
 
     
                     if (gender2 === 'K' && teamsKungi.includes(teamName)) {
+                        teamGenders[teamName] = 'K';
                         resultsKungi[teamName] = { Vieta: columnZ };
                     } else if (gender2 === 'D' && teamsDamas.includes(teamName)) {
+                        teamGenders[teamName] = 'D';
                         resultsDamas[teamName] = { Vieta: columnZ };
                     }
                     
@@ -133,9 +135,9 @@
                         tableHTML += `<td><strong>${teamPoints[rowTeam]}</strong></td>`;
 
                         // const teamVieta = resultsKungi[`${rowTeam}`]?.Vieta || resultsDamas[`${rowTeam}`]?.Vieta || '';  // Make sure to check both Kungi and Damas results
-                        const teamVieta = gender === 'K' 
+                        const teamVieta = teamGenders[rowTeam] === 'K' 
                             ? resultsKungi[`${rowTeam}`]?.Vieta || '' 
-                            : resultsDamas[`${rowTeam}`]?.Vieta || '';  
+                            : resultsDamas[`${rowTeam}`]?.Vieta || ''; 
                         console.log(`Row team: ${rowTeam}, Vieta: ${teamVieta}`);  // Debugging line
                         tableHTML += `<td>${teamVieta}</td>`; 
                         // tableHTML += `<td>${results[`${rowTeam}-${teams[0]}`]?.Vieta || ''}</td>`;
