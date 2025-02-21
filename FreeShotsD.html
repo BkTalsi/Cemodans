@@ -30,6 +30,18 @@
                 const threePointRows = rows.map(row => row.c.slice(0, 3).map(cell => cell?.v || ""));
                 const freeThrowRows = rows.map(row => row.c.slice(3, 6).map(cell => cell?.v || ""));
 
+                // Convert score columns to numbers for sorting
+                threePointRows.forEach(row => row[2] = parseFloat(row[2]) || 0);
+                freeThrowRows.forEach(row => row[2] = parseFloat(row[2]) || 0);
+        
+                // Sort primarily by score (descending), secondarily by original index (ascending)
+                threePointRows.sort((a, b) => b[2] - a[2] || a[3] - b[3]);
+                freeThrowRows.sort((a, b) => b[2] - a[2] || a[3] - b[3]);
+        
+                // Remove original index before generating table
+                threePointRows = threePointRows.map(row => row.slice(0, 3));
+                freeThrowRows = freeThrowRows.map(row => row.slice(0, 3));
+                
                 // Generate tables
                 const createTable = (headers, rows) => {
                     let table = `<table class="table table-striped table-bordered">
