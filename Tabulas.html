@@ -44,8 +44,8 @@
                     let scoreB = row.c[6]?.v;
                     let zeroIndic;
 
-                    const columnT = row.c[18]?.v; // T column
-                    const columnU = row.c[19]?.v; // U column
+                    const gender = row.c[18]?.v; // T column
+                    const teamName  = row.c[19]?.v; // U column
                     const columnZ = row.c[24]?.v; // Z column (used for "Vieta")
                     if (gender === 'K' && teamsKungi.includes(teamName)) {
                         resultsKungi[`${teamName}`] = { Vieta: columnZ };
