@@ -67,8 +67,8 @@
                     return table;
                 };
 
-                document.getElementById("three-point-container").innerHTML = createTable(["Komanda", "Spēlētāja", "Rezultāts"], threePointRows);
-                document.getElementById("free-throw-container").innerHTML = createTable(["Komanda", "Spēlētāja", "Rezultāts"], freeThrowRows);
+                document.getElementById("three-point-container").innerHTML = createTable(["Komanda", "Spēlētāja", "Rezultāts", "#"], threePointRows);
+                document.getElementById("free-throw-container").innerHTML = createTable(["Komanda", "Spēlētāja", "Rezultāts", "#"], freeThrowRows);
 
             } catch (error) {
                 console.error("Error fetching data:", error);
